@@ -10,20 +10,28 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 #import "Store.h"
+#import <MapKit/MapKit.h>
+#import "MapViewAnnotation.h"
 
-@interface NearbyStoresViewController () <NSXMLParserDelegate>
+#define METERS_PER_MILE 1609.344
+
+@interface NearbyStoresViewController () <NSXMLParserDelegate, MKMapViewDelegate>
 {
-    NSString *nextString;
+    NSString *response;
     NSXMLParser *parser;
     NSString *currentElement;
     NSString *val;
 
     NSMutableArray *stores;
-    NSMutableString *storeName;
-    NSString *storeHours;
-    NSString *storeAddress;
+    float storeLatitude;
+    float storeLongitude;
     Store *store;
+    
+    UILabel *hoursLabel;
+    UITextView *hoursTextView;
 }
+
+@property (nonatomic, strong) MKMapView *mapView;
 
 @end
 
@@ -46,6 +54,25 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(10, 100, 300, 300)];
+    self.mapView.delegate=self;
+    [self.view addSubview:self.mapView];
+    
+    hoursLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 420, 300, 20)];
+    hoursLabel.text = @"Opening hours:";
+    [self.view addSubview:hoursLabel];
+    
+    hoursTextView = [[UITextView alloc] initWithFrame:CGRectMake(7, 430, 300, 100)];
+    hoursTextView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:hoursTextView];
+    
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = lat;
+    zoomLocation.longitude= lon;
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1.5*METERS_PER_MILE, 1.5*METERS_PER_MILE);
+    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
+    [_mapView setRegion:adjustedRegion animated:YES];
+    
     NSString *urlString = [NSString stringWithFormat:@"http://www.miles-and-more-shopfinder.de/stores/search/lang:eng?lat=%f&lng=%f&radius=1&country_code=%@&address=%@", lat,lon, country, city];
     
     stores = [[NSMutableArray alloc] init];
@@ -58,31 +85,45 @@
     [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        // Print the response body in text
-        NSString *response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSRange range = [response rangeOfString:@"<ul class=\"partner-stores\">"];
-        NSString *substring = [[response substringFromIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-        
-        range = [response rangeOfString:@"</ul>"];
-        substring = [[substring substringToIndex:range.location-40] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        //nextString = [substring substringFromIndex:NSMaxRange(range)];
-        
-        //NSLog(@"NextString: %@", nextString);
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-//            NSURL *url = [NSURL URLWithString:urlString];
-            parser = [[NSXMLParser alloc] initWithData:[substring dataUsingEncoding:NSUTF8StringEncoding]];//ContentsOfURL:url];
-            [parser setDelegate:self];
-            [parser setShouldResolveExternalEntities:NO];
-            [parser parse];
+            response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSRange rangeStart = [response rangeOfString:@"<ul class=\"partner-stores\">"];
+            
+            while (rangeStart.location != NSNotFound) {
+                
+                NSString *substring = [[response substringFromIndex:rangeStart.location] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                
+                NSRange rangeEnd = [substring rangeOfString:@"</ul>"];
+                response = [substring substringFromIndex:NSMaxRange(rangeEnd)];
+                substring = [[substring substringToIndex:rangeEnd.location+5] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                
+                parser = [[NSXMLParser alloc] initWithData:[substring dataUsingEncoding:NSUTF8StringEncoding]];//ContentsOfURL:url];
+                [parser setDelegate:self];
+                [parser setShouldResolveExternalEntities:NO];
+                [parser parse];
+                
+                rangeStart = [response rangeOfString:@"<ul class=\"partner-stores\">"];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                int tag = 0;
+                for (Store *st in stores) {
+                    NSLog(@"%@|%@|%@|%f|%f", st.storeName, st.storeAddress, st.storeHours, st.longitude, st.latitude);
+                    
+                    CLLocationCoordinate2D location;
+                    NSLog(@"%f %f", st.latitude, st.longitude);
+                    location.latitude = st.latitude;
+                    location.longitude = st.longitude;
+                    MapViewAnnotation *newAnnotation = [[MapViewAnnotation alloc] initWithTitle:st.storeName andCoordinate:location andTag:tag++];
+                    [self.mapView addAnnotation:newAnnotation];
+                }
+            });
         });
-//        <div id="searchResults">
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
     [operation start];
-    
-//    NSLog(@"call string: %@", urlString);
 }
 
 #pragma mark NSXMLParserDelegate methods
@@ -94,76 +135,38 @@
     currentElement = [attributeDict objectForKey:@"class"];
     if ([currentElement isEqualToString:@"store-name"]) {
         if (store) {
-            NSLog(@"%@|%@|%@", store.storeName, store.storeAddress, store.storeHours);
-            [stores addObject:store];
+
+            BOOL exist = NO;
+            for (Store *tempStore in stores) {
+                if ([tempStore.storeAddress isEqualToString:store.storeAddress]) {
+                    exist=YES;
+                }
+            }
+            
+            if (!exist) {
+                store.longitude = storeLongitude;
+                store.latitude = storeLatitude;
+                [stores addObject:store];
+            }
         }
         store = [[Store alloc] init];
+    } else if([currentElement isEqualToString:@"store "]) {
+        storeLatitude = [[attributeDict objectForKey:@"data-latitude"] floatValue];
+        storeLongitude = [[attributeDict objectForKey:@"data-longitude"] floatValue];
     }
     
     val=@"";
-//    NSLog(@"current: %@", currentElement);
-//    element = elementName;
-//    
-//    if ([element isEqualToString:@"item"]) {
-//        feed = [[Feed alloc] init];
-//        title = [[NSMutableString alloc] init];
-//        link = [[NSMutableString alloc] init];
-//        description = [[NSMutableString alloc] init];
-//        pubDate = [[NSMutableString alloc] init];
-//        content = [[NSMutableString alloc] init];
-//    }
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    
-//    NSLog(@"did end: %@", elementName);
-//    if ([elementName isEqualToString:@"item"]) {
-//        
-//        //        NSLog(@"did end: %@", title);
-//        feed.title = title;
-//        feed.link = link;
-//        feed.description = description;
-//        
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"EEE, dd MM yyyy HH:mm:ss"];
-//        
-//        pubDate = [NSMutableString stringWithString:[pubDate stringByReplacingOccurrencesOfString:@"+0000" withString:@""]];
-//        pubDate = [NSMutableString stringWithString:[pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-//        feed.date = [formatter dateFromString:pubDate];
-//        
-//        feed.content = content;
-//        
-//        NSError *error = NULL;
-//        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(<img\\s[\\s\\S]*?src\\s*?=\\s*?['\"](.*?)['\"][\\s\\S]*?>)+?"
-//                                                                               options:NSRegularExpressionCaseInsensitive
-//                                                                                 error:&error];
-//        
-//        [regex enumerateMatchesInString:feed.content
-//                                options:0
-//                                  range:NSMakeRange(0, [feed.content length])
-//                             usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-//                                 NSString *img = [feed.content substringWithRange:[result rangeAtIndex:2]];
-//                                 feed.imagePath = img;
-//                             }];
-//        [tempArray addObject:feed];
-//    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-//    NSLog(@"in %@ found characters %@", currentElement, string);
     val = [NSString stringWithFormat:@"%@%@",val,[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ];
     val = [val stringByReplacingOccurrencesOfString:@"  " withString:@""];
     if ([currentElement isEqualToString:@"store-name"] && val.length>0) {
-//        NSLog(@"name: |%@|", val);
         store.storeName = val;
     } else if([currentElement isEqualToString:@"store-address"] && val.length>0) {
-//        NSLog(@"address: |%@|", val);
         store.storeAddress = val;
-    } else if([currentElement isEqualToString:@"store-contact"] && val.length>0) {
-//        NSLog(@"contact: |%@|", val);
     } else if([currentElement isEqualToString:@"store-openinghours"] && val.length>0) {
-//        NSLog(@"hours: |%@|", val);
         store.storeHours = val;
     }
 }
@@ -171,27 +174,34 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
     if (store) {
-        NSLog(@"%@|%@|%@", store.storeName, store.storeAddress, store.storeHours);
-        [stores addObject:store];
+        BOOL exist = NO;
+        for (Store *tempStore in stores) {
+            if ([tempStore.storeAddress isEqualToString:store.storeAddress]) {
+                exist=YES;
+            }
+        }
+        
+        if (!exist) {
+            store.longitude = storeLongitude;
+            store.latitude = storeLatitude;
+            [stores addObject:store];
+        }
     }
-//    dispatch_async(dispatch_get_main_queue(), ^(void){
-//        if (currentPage==1) {
-//            feeds = [NSArray arrayWithArray:tempArray];
-//        } else {
-//            NSMutableArray *arr = [NSMutableArray arrayWithArray:feeds];
-//            [arr addObjectsFromArray:tempArray];
-//            feeds = [NSArray arrayWithArray:arr];
-//        }
-//        
-//        if (tempArray.count<10) {
-//            lastPageDownloaded=YES;
-//        }
-//        [refreshControl endRefreshing];
-//        [self.tableView reloadData];
-//        [progressView removeFromSuperview];
-//        isRefreshing=NO;
-//        self.tableView.userInteractionEnabled=YES;
-//    });
+}
+
+#pragma mark MKMapViewDelegate
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    MapViewAnnotation *annotation = (MapViewAnnotation *)[view annotation];
+    Store *store = [stores objectAtIndex:annotation.tag];
+    NSLog(@"hours: %@",store.storeHours);
+    NSArray *hoursArray = [store.storeHours componentsSeparatedByString:@","];
+    
+    NSString *hoursString = @"";
+    for (NSString *string in hoursArray) {
+        hoursString = [NSString stringWithFormat:@"%@\n%@",hoursString, [string stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    }
+    hoursTextView.text = hoursString;
 }
 
 @end
