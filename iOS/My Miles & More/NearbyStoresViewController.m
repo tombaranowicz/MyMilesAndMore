@@ -65,9 +65,9 @@
         
         range = [response rangeOfString:@"</ul>"];
         substring = [[substring substringToIndex:range.location-40] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        nextString = [substring substringFromIndex:NSMaxRange(range)];
+        //nextString = [substring substringFromIndex:NSMaxRange(range)];
         
-        NSLog(@"NextString: %@", nextString);
+        //NSLog(@"NextString: %@", nextString);
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
 //            NSURL *url = [NSURL URLWithString:urlString];
             parser = [[NSXMLParser alloc] initWithData:[substring dataUsingEncoding:NSUTF8StringEncoding]];//ContentsOfURL:url];
