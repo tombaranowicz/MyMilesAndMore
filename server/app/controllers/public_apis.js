@@ -67,10 +67,10 @@ exports.send_push = function(req, res) {  //POST// params tag_id, title, descrip
     } else {
 
       var gcm = new GCM('AIzaSyCAGoHjZOwucv2QZbYHQKnAsCmbs5ty-oE');
-
+      console.log('after register');
       for (var i=0;i<object.android_devices.length;i++)
       { 
-        var device = devices[i];
+        var device = object.android_devices[i];
         console.log('found device ' + device);
 
         if (gcm) {
@@ -85,9 +85,11 @@ exports.send_push = function(req, res) {  //POST// params tag_id, title, descrip
           };
           gcm.send(message, function(err, messageId){
             if (err) {
-              console.log("Something has gone wrong!");
+              console.log("Something has gone wrong! " + err);
+              res.send(404);
             } else {
               console.log("Sent with message ID: ", messageId);
+              res.send({'send to device':device});
             }
           });
         }
@@ -102,11 +104,12 @@ exports.add_android_device = function(req, res) {  //POST// params tag_id, andro
     if (!object) {
       return res.send({'error':'no object'});
     } else {
-      object.android_devices.addToSet(android_device_token);
+      object.android_devices.addToSet(req.body.android_device_token);
       object.save(function(err){
         if (!err) {
-          return res.send('ok':android_device_token);
+          return res.send({'ok':req.body.android_device_token});
         }
       });
     }
+  });
 }

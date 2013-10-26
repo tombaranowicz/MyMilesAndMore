@@ -8,6 +8,6 @@ module.exports = function (app, passport)
   app.post('/objects/add_tag', public_api.add_tag) //POST// params tag_id, name, description, link
   app.post('/objects/delete_tag', public_api.delete_tag) //POST// params tag_id
 
-  app.post('/objects/send_push', public_api.send_push) //POST// params tag_id
+  app.post('/objects/send_push', public_api.send_push) //POST// params tag_id, title, description
   app.post('/objects/add_android_device', public_api.add_android_device) //POST// params tag_id, android_device_GCM
 }
