@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (dismiss)
-
+-(void)dismissViewControllerShortcut;
+-(void)insertCloseButton;
 @end

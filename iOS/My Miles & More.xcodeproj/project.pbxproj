@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B7EF58E181C777400CB9B0C /* BeaconObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF58D181C777400CB9B0C /* BeaconObject.m */; };
+		7B7EF591181C7D5500CB9B0C /* UIViewController+dismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */; };
 		7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */; };
 		7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75789181C48F000B69F3E /* DescriptionViewController.m */; };
 		7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */; };
@@ -41,7 +43,6 @@
 		AA480E0A181C2569005630AB /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480E01181C2569005630AB /* UIImageView+AFNetworking.m */; };
 		AA480E0D181C3EF5005630AB /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480E0C181C3EF5005630AB /* Store.m */; };
 		AA480E10181C5193005630AB /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480E0F181C5193005630AB /* MapViewAnnotation.m */; };
-		AA480E12181C5259005630AB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA480E11181C5259005630AB /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B7EF58C181C777400CB9B0C /* BeaconObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconObject.h; sourceTree = "<group>"; };
+		7B7EF58D181C777400CB9B0C /* BeaconObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconObject.m; sourceTree = "<group>"; };
+		7B7EF58F181C7D5500CB9B0C /* UIViewController+dismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+dismiss.h"; sourceTree = "<group>"; };
+		7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+dismiss.m"; sourceTree = "<group>"; };
 		7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		7BB75788181C48F000B69F3E /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
 		7BB75789181C48F000B69F3E /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
@@ -188,6 +193,8 @@
 				7BB75788181C48F000B69F3E /* DescriptionViewController.h */,
 				7BB75789181C48F000B69F3E /* DescriptionViewController.m */,
 				7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */,
+				7B7EF58C181C777400CB9B0C /* BeaconObject.h */,
+				7B7EF58D181C777400CB9B0C /* BeaconObject.m */,
 				7BBE6BBE181BE92A004E1C68 /* Images.xcassets */,
 				7BBE6BAA181BE92A004E1C68 /* Supporting Files */,
 				AA480DEA181C197F005630AB /* NearbyStoresViewController.h */,
@@ -198,6 +205,8 @@
 				AA480E0C181C3EF5005630AB /* Store.m */,
 				AA480E0E181C5193005630AB /* MapViewAnnotation.h */,
 				AA480E0F181C5193005630AB /* MapViewAnnotation.m */,
+				7B7EF58F181C7D5500CB9B0C /* UIViewController+dismiss.h */,
+				7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */,
 			);
 			path = "My Miles & More";
 			sourceTree = "<group>";
@@ -372,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA480E08181C2569005630AB /* AFURLConnectionOperation.m in Sources */,
+				7B7EF58E181C777400CB9B0C /* BeaconObject.m in Sources */,
 				AA480E0A181C2569005630AB /* UIImageView+AFNetworking.m in Sources */,
 				AA480E10181C5193005630AB /* MapViewAnnotation.m in Sources */,
 				AA480E04181C2569005630AB /* AFImageRequestOperation.m in Sources */,
@@ -383,6 +393,7 @@
 				7BC25622181C031200C7EF08 /* BeaconManager.m in Sources */,
 				7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */,
 				7BBE6BB4181BE92A004E1C68 /* AppDelegate.m in Sources */,
+				7B7EF591181C7D5500CB9B0C /* UIViewController+dismiss.m in Sources */,
 				7BBE6BB0181BE92A004E1C68 /* main.m in Sources */,
 				AA480E05181C2569005630AB /* AFJSONRequestOperation.m in Sources */,
 				AA480DEC181C197F005630AB /* NearbyStoresViewController.m in Sources */,

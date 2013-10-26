@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BeaconObject;
 
 @interface DescriptionViewController : UIViewController
-
+- (id)initWithBeaconObject:(BeaconObject*)beaconObject;
 @end

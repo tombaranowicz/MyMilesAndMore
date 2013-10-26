@@ -10,4 +10,16 @@
 
 @implementation UIViewController (dismiss)
 
+-(void)dismissViewControllerShortcut
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)insertCloseButton
+{
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewControllerShortcut)];
+    
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+}
+
 @end
