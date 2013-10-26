@@ -1,5 +1,5 @@
 //
-//  DescriptionViewController.h
+//  UIViewController+dismiss.h
 //  My Miles & More
 //
 //  Created by Mateusz Glapiak on 10/26/13.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class BeaconObject;
 
-@interface DescriptionViewController : UIViewController
-- (id)initWithBeaconObject:(BeaconObject*)beaconObject;
+@interface UIViewController (dismiss)
+-(void)dismissViewControllerShortcut;
+-(void)insertCloseButton;
 @end

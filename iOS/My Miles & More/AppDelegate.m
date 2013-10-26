@@ -11,9 +11,15 @@
 #import "BeaconManager.h"
 #import "ViewController.h"
 #import "DescriptionViewController.h"
+#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperation.h"
+#import "BeaconObject.h"
+#import "DescriptionViewController.h"
+#import "UIViewController+dismiss.h"
+
 #define app_uuid @"B929D963-23FA-8D33-7039-D000B9B8FA10"
 
-@interface AppDelegate()
+@interface AppDelegate()<BeaconManagerDelegate>
 @property (nonatomic) BeaconManager *beaconManager;
 
 @end
@@ -22,16 +28,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    DescriptionViewController* descriptionViewController = [DescriptionViewController new];
-    
-    
-    UINavigationController *rootController = [[UINavigationController alloc] initWithRootViewController:descriptionViewController];
-    rootController.navigationBar.hidden = NO;
-    self.window.rootViewController = rootController;
-
-    
     // Override point for customization after application launch.
     self.beaconManager = [[BeaconManager alloc] initWithUUID:app_uuid];
+    [self.beaconManager setDelegate:self];
     
     return YES;
 }
@@ -62,4 +61,63 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+
+// SERVER
+
+- (void)requestWithUUID:(NSString*)uuid
+{
+    
+    NSString* urlString = [@"http://198.245.54.12:8000/objects/get_tag_details/" stringByAppendingString:uuid];
+    
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
+                                                            path:urlString
+                                                      parameters:nil];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if([[operation response] statusCode] == 200)
+        {
+        
+            NSString* response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSError *e = nil;
+            NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&e];
+            NSLog(@"%@",response);
+            
+            BeaconObject* beaconObject = [[BeaconObject alloc] initWithDictionary:jsonDict[@"object"]];
+        
+            DescriptionViewController* descriptopnVC = [[DescriptionViewController alloc] initWithBeaconObject:beaconObject];
+            
+            
+            UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:descriptopnVC];
+            
+            [descriptopnVC insertCloseButton];
+            
+            [self.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    [operation start];
+    
+}
+
+#pragma mark - BeaconDelegate
+
+- (void)foundDeviceWithUUID:(NSString *)uuid
+{
+    [self requestWithUUID:uuid];
+}
+
 @end
+
+

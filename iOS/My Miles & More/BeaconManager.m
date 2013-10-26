@@ -12,6 +12,7 @@
 @property (nonatomic) CBCentralManager *btManager;
 @property (nonatomic,assign) BOOL processing;
 @property (nonatomic,copy) NSString* UUID;
+@property (nonatomic) NSMutableSet* foundDevices;
 
 @end
 
@@ -25,6 +26,7 @@
         _btManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_queue_create("My Queue",NULL)];
         _UUID = UUID;
         _processing = NO;
+        _foundDevices = [NSMutableSet set];
     }
     
     return self;
@@ -76,11 +78,13 @@
     CFRelease(theUUID);
     NSString *UUID = (__bridge_transfer NSString *)string;
     
-    if([self.UUID isEqualToString:UUID] && !self.processing){
-        _processing=YES;
-        //[[Server sharedInstance] getSenderByBluetooth:UUID];
-        NSLog(@"FOUND !!!!! UUID %@", UUID);
+    
+    if(![self.foundDevices containsObject:UUID])
+    {
+        [self.foundDevices addObject:UUID];
+        [self.delegate performSelector:@selector(foundDeviceWithUUID:) withObject:UUID];
     }
+    
 }
 
 

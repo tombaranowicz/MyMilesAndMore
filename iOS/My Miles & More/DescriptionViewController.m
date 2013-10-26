@@ -9,8 +9,11 @@
 #import "DescriptionViewController.h"
 #import <MapKit/MapKit.h>
 #import "UIColor+iOS7Colors.h"
+#import "BeaconObject.h"
 
 @interface DescriptionViewController ()
+@property (nonatomic,strong) BeaconObject* beaconObject;
+
 @property (weak, nonatomic) IBOutlet UILabel *descriptionTitle;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *map;
@@ -23,11 +26,12 @@
 
 @implementation DescriptionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithBeaconObject:(BeaconObject*)beaconObject
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
+        self.beaconObject = beaconObject;
     }
     return self;
 }
@@ -37,9 +41,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.descriptionTitle.text = @"Snorlaxen Shopiren";
+    self.descriptionTitle.text = self.beaconObject.name;
     
-   NSString* text = @"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+    NSString* text = self.beaconObject.descriptionText;
     
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -55,8 +59,8 @@
     
     self.descriptionText.attributedText = string;
     
-    self.lognitude = 13.406091;
-    self.latitude = 52.519173;
+    self.lognitude = self.beaconObject.longitude;
+    self.latitude = self.beaconObject.latitude;
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.latitude, self.lognitude);
     [self.map setCenterCoordinate:coordinate];
     [self.map setUserInteractionEnabled:NO];
@@ -66,14 +70,12 @@
     [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     
-    
+}
+
+- (IBAction)buttonTapped:(id)sender
+{
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
