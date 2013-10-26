@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,CBCentralManagerDelegate>
-{
-    CBCentralManager *btManager;
-    NSMutableArray *askedUUIDsArray;
-    BOOL processing;
-}
+@interface AppDelegate : UIResponder <UIApplicationDelegate,CBCentralManagerDelegate,CLLocationManagerDelegate,CBPeripheralManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
