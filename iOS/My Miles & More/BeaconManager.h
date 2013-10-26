@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface BeaconManager : NSObject
 
+@interface BeaconManager : NSObject<CBCentralManagerDelegate>
+- (id)initWithUUID:(NSString*)UUID;
 
 
 @end
