@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "NearbyStoresViewController.h"
+
 
 @interface ViewController ()
 
@@ -18,6 +20,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    NearbyStoresViewController *vc = [[NearbyStoresViewController alloc] initWithLatitude:52.519171 withLongitude:13.4060912 withCountryCode:@"DE" withCity:@"Berlin"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

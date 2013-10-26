@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 #import "BeaconManager.h"
+#import "ViewController.h"
 
-#define app_udid @"B929D963-23FA-8D33-7039-D000B9B8FA10"
+#define app_uuid @"B929D963-23FA-8D33-7039-D000B9B8FA10"
 
 @interface AppDelegate()
 @property (nonatomic) BeaconManager *beaconManager;
@@ -20,8 +21,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    UINavigationController *rootController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    rootController.navigationBar.hidden = NO;
+    self.window.rootViewController = rootController;
+
+    
     // Override point for customization after application launch.
-    self.beaconManager = [[BeaconManager alloc] initWithUUID:app_udid];
+    self.beaconManager = [[BeaconManager alloc] initWithUUID:app_uuid];
     
     return YES;
 }
