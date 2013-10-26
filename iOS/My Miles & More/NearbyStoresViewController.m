@@ -19,9 +19,8 @@
     NSString *val;
 
     NSMutableArray *stores;
-    NSMutableString *storeName;
-    NSString *storeHours;
-    NSString *storeAddress;
+    float storeLatitude;
+    float storeLongitude;
     Store *store;
 }
 
@@ -78,26 +77,12 @@
                 rangeStart = [response rangeOfString:@"<ul class=\"partner-stores\">"];
             }
             
-    dispatch_async(dispatch_get_main_queue(), ^(void){
-        
-//        NSLog(@"did end");
-//        if (currentPage==1) {
-//            feeds = [NSArray arrayWithArray:tempArray];
-//        } else {
-//            NSMutableArray *arr = [NSMutableArray arrayWithArray:feeds];
-//            [arr addObjectsFromArray:tempArray];
-//            feeds = [NSArray arrayWithArray:arr];
-//        }
-//
-//        if (tempArray.count<10) {
-//            lastPageDownloaded=YES;
-//        }
-//        [refreshControl endRefreshing];
-//        [self.tableView reloadData];
-//        [progressView removeFromSuperview];
-//        isRefreshing=NO;
-//        self.tableView.userInteractionEnabled=YES;
-    });
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                NSLog(@"did end");
+                for (Store *store in stores) {
+                    NSLog(@"%@|%@|%@|%f|%f", store.storeName, store.storeAddress, store.storeHours, store.longitude, store.latitude);
+                }
+            });
         });
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -124,17 +109,19 @@
             }
             
             if (!exist) {
-                NSLog(@"add %@|%@|%@", store.storeName, store.storeAddress, store.storeHours);
+                store.longitude = storeLongitude;
+                store.latitude = storeLongitude;
                 [stores addObject:store];
             }
-
         }
         store = [[Store alloc] init];
+    } else if([currentElement isEqualToString:@"store "]) {
+        storeLatitude = [[attributeDict objectForKey:@"data-latitude"] floatValue];
+        storeLongitude = [[attributeDict objectForKey:@"data-longitude"] floatValue];
     }
     
     val=@"";
 }
-
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
@@ -144,8 +131,6 @@
         store.storeName = val;
     } else if([currentElement isEqualToString:@"store-address"] && val.length>0) {
         store.storeAddress = val;
-    } else if([currentElement isEqualToString:@"store-contact"] && val.length>0) {
-        
     } else if([currentElement isEqualToString:@"store-openinghours"] && val.length>0) {
         store.storeHours = val;
     }
@@ -162,7 +147,8 @@
         }
         
         if (!exist) {
-            NSLog(@"add %@|%@|%@", store.storeName, store.storeAddress, store.storeHours);
+            store.longitude = storeLongitude;
+            store.latitude = storeLongitude;
             [stores addObject:store];
         }
     }

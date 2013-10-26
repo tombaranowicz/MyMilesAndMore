@@ -16,4 +16,6 @@
 @property (nonatomic, strong) NSString *storeName;
 @property (nonatomic, strong) NSString *storeAddress;
 @property (nonatomic, strong) NSString *storeHours;
+@property (nonatomic) float latitude;
+@property (nonatomic) float longitude;
 @end
