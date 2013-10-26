@@ -7,11 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    UINavigationController *rootController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    rootController.navigationBar.hidden = NO;
+    self.window.rootViewController = rootController;
+
+    
     // Override point for customization after application launch.
     btManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     askedUUIDsArray = [NSMutableArray arrayWithObject:@"B929D963-23FA-8D33-7039-D000B9B8FA10"];
