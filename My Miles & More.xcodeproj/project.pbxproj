@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */; };
+		7BBE6BA4181BE92A004E1C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA3181BE92A004E1C68 /* Foundation.framework */; };
+		7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */; };
+		7BBE6BA8181BE92A004E1C68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA7181BE92A004E1C68 /* UIKit.framework */; };
+		7BBE6BAE181BE92A004E1C68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BBE6BAC181BE92A004E1C68 /* InfoPlist.strings */; };
+		7BBE6BB0181BE92A004E1C68 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE6BAF181BE92A004E1C68 /* main.m */; };
+		7BBE6BB4181BE92A004E1C68 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE6BB3181BE92A004E1C68 /* AppDelegate.m */; };
+		7BBE6BB7181BE92A004E1C68 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBE6BB5181BE92A004E1C68 /* Main_iPhone.storyboard */; };
+		7BBE6BBA181BE92A004E1C68 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBE6BB8181BE92A004E1C68 /* Main_iPad.storyboard */; };
+		7BBE6BBD181BE92A004E1C68 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE6BBC181BE92A004E1C68 /* ViewController.m */; };
+		7BBE6BBF181BE92A004E1C68 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBE6BBE181BE92A004E1C68 /* Images.xcassets */; };
+		7BBE6BC6181BE92A004E1C68 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BC5181BE92A004E1C68 /* XCTest.framework */; };
+		7BBE6BC7181BE92A004E1C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA3181BE92A004E1C68 /* Foundation.framework */; };
+		7BBE6BC8181BE92A004E1C68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA7181BE92A004E1C68 /* UIKit.framework */; };
+		7BBE6BD0181BE92A004E1C68 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BBE6BCE181BE92A004E1C68 /* InfoPlist.strings */; };
+		7BBE6BD2181BE92A004E1C68 /* My_Miles___MoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE6BD1181BE92A004E1C68 /* My_Miles___MoreTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7BBE6BC9181BE92A004E1C68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BBE6B98181BE92A004E1C68 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BBE6B9F181BE92A004E1C68;
+			remoteInfo = "My Miles & More";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		7BBE6BA0181BE92A004E1C68 /* My Miles & More.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Miles & More.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BBE6BA3181BE92A004E1C68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7BBE6BA7181BE92A004E1C68 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7BBE6BAB181BE92A004E1C68 /* My Miles & More-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "My Miles & More-Info.plist"; sourceTree = "<group>"; };
+		7BBE6BAD181BE92A004E1C68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7BBE6BAF181BE92A004E1C68 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7BBE6BB1181BE92A004E1C68 /* My Miles & More-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "My Miles & More-Prefix.pch"; sourceTree = "<group>"; };
+		7BBE6BB2181BE92A004E1C68 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7BBE6BB3181BE92A004E1C68 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7BBE6BB6181BE92A004E1C68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		7BBE6BB9181BE92A004E1C68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		7BBE6BBB181BE92A004E1C68 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7BBE6BBC181BE92A004E1C68 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7BBE6BBE181BE92A004E1C68 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BBE6BC4181BE92A004E1C68 /* My Miles & MoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My Miles & MoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BBE6BC5181BE92A004E1C68 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7BBE6BCD181BE92A004E1C68 /* My Miles & MoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "My Miles & MoreTests-Info.plist"; sourceTree = "<group>"; };
+		7BBE6BCF181BE92A004E1C68 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7BBE6BD1181BE92A004E1C68 /* My_Miles___MoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "My_Miles___MoreTests.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BBE6B9D181BE92A004E1C68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */,
+				7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */,
+				7BBE6BA8181BE92A004E1C68 /* UIKit.framework in Frameworks */,
+				7BBE6BA4181BE92A004E1C68 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BBE6BC1181BE92A004E1C68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBE6BC6181BE92A004E1C68 /* XCTest.framework in Frameworks */,
+				7BBE6BC8181BE92A004E1C68 /* UIKit.framework in Frameworks */,
+				7BBE6BC7181BE92A004E1C68 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7BBE6B97181BE92A004E1C68 = {
+			isa = PBXGroup;
+			children = (
+				7BBE6BA9181BE92A004E1C68 /* My Miles & More */,
+				7BBE6BCB181BE92A004E1C68 /* My Miles & MoreTests */,
+				7BBE6BA2181BE92A004E1C68 /* Frameworks */,
+				7BBE6BA1181BE92A004E1C68 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7BBE6BA1181BE92A004E1C68 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BBE6BA0181BE92A004E1C68 /* My Miles & More.app */,
+				7BBE6BC4181BE92A004E1C68 /* My Miles & MoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BBE6BA2181BE92A004E1C68 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */,
+				7BBE6BA3181BE92A004E1C68 /* Foundation.framework */,
+				7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */,
+				7BBE6BA7181BE92A004E1C68 /* UIKit.framework */,
+				7BBE6BC5181BE92A004E1C68 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7BBE6BA9181BE92A004E1C68 /* My Miles & More */ = {
+			isa = PBXGroup;
+			children = (
+				7BBE6BB2181BE92A004E1C68 /* AppDelegate.h */,
+				7BBE6BB3181BE92A004E1C68 /* AppDelegate.m */,
+				7BBE6BB5181BE92A004E1C68 /* Main_iPhone.storyboard */,
+				7BBE6BB8181BE92A004E1C68 /* Main_iPad.storyboard */,
+				7BBE6BBB181BE92A004E1C68 /* ViewController.h */,
+				7BBE6BBC181BE92A004E1C68 /* ViewController.m */,
+				7BBE6BBE181BE92A004E1C68 /* Images.xcassets */,
+				7BBE6BAA181BE92A004E1C68 /* Supporting Files */,
+			);
+			path = "My Miles & More";
+			sourceTree = "<group>";
+		};
+		7BBE6BAA181BE92A004E1C68 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BBE6BAB181BE92A004E1C68 /* My Miles & More-Info.plist */,
+				7BBE6BAC181BE92A004E1C68 /* InfoPlist.strings */,
+				7BBE6BAF181BE92A004E1C68 /* main.m */,
+				7BBE6BB1181BE92A004E1C68 /* My Miles & More-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7BBE6BCB181BE92A004E1C68 /* My Miles & MoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				7BBE6BD1181BE92A004E1C68 /* My_Miles___MoreTests.m */,
+				7BBE6BCC181BE92A004E1C68 /* Supporting Files */,
+			);
+			path = "My Miles & MoreTests";
+			sourceTree = "<group>";
+		};
+		7BBE6BCC181BE92A004E1C68 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BBE6BCD181BE92A004E1C68 /* My Miles & MoreTests-Info.plist */,
+				7BBE6BCE181BE92A004E1C68 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7BBE6B9F181BE92A004E1C68 /* My Miles & More */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BBE6BD5181BE92A004E1C68 /* Build configuration list for PBXNativeTarget "My Miles & More" */;
+			buildPhases = (
+				7BBE6B9C181BE92A004E1C68 /* Sources */,
+				7BBE6B9D181BE92A004E1C68 /* Frameworks */,
+				7BBE6B9E181BE92A004E1C68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "My Miles & More";
+			productName = "My Miles & More";
+			productReference = 7BBE6BA0181BE92A004E1C68 /* My Miles & More.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7BBE6BC3181BE92A004E1C68 /* My Miles & MoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BBE6BD8181BE92A004E1C68 /* Build configuration list for PBXNativeTarget "My Miles & MoreTests" */;
+			buildPhases = (
+				7BBE6BC0181BE92A004E1C68 /* Sources */,
+				7BBE6BC1181BE92A004E1C68 /* Frameworks */,
+				7BBE6BC2181BE92A004E1C68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7BBE6BCA181BE92A004E1C68 /* PBXTargetDependency */,
+			);
+			name = "My Miles & MoreTests";
+			productName = "My Miles & MoreTests";
+			productReference = 7BBE6BC4181BE92A004E1C68 /* My Miles & MoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BBE6B98181BE92A004E1C68 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Mateusz Glapiak";
+				TargetAttributes = {
+					7BBE6BC3181BE92A004E1C68 = {
+						TestTargetID = 7BBE6B9F181BE92A004E1C68;
+					};
+				};
+			};
+			buildConfigurationList = 7BBE6B9B181BE92A004E1C68 /* Build configuration list for PBXProject "My Miles & More" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7BBE6B97181BE92A004E1C68;
+			productRefGroup = 7BBE6BA1181BE92A004E1C68 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BBE6B9F181BE92A004E1C68 /* My Miles & More */,
+				7BBE6BC3181BE92A004E1C68 /* My Miles & MoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7BBE6B9E181BE92A004E1C68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBE6BBA181BE92A004E1C68 /* Main_iPad.storyboard in Resources */,
+				7BBE6BBF181BE92A004E1C68 /* Images.xcassets in Resources */,
+				7BBE6BB7181BE92A004E1C68 /* Main_iPhone.storyboard in Resources */,
+				7BBE6BAE181BE92A004E1C68 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BBE6BC2181BE92A004E1C68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBE6BD0181BE92A004E1C68 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BBE6B9C181BE92A004E1C68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBE6BBD181BE92A004E1C68 /* ViewController.m in Sources */,
+				7BBE6BB4181BE92A004E1C68 /* AppDelegate.m in Sources */,
+				7BBE6BB0181BE92A004E1C68 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BBE6BC0181BE92A004E1C68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBE6BD2181BE92A004E1C68 /* My_Miles___MoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7BBE6BCA181BE92A004E1C68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BBE6B9F181BE92A004E1C68 /* My Miles & More */;
+			targetProxy = 7BBE6BC9181BE92A004E1C68 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7BBE6BAC181BE92A004E1C68 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BBE6BAD181BE92A004E1C68 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7BBE6BB5181BE92A004E1C68 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BBE6BB6181BE92A004E1C68 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		7BBE6BB8181BE92A004E1C68 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BBE6BB9181BE92A004E1C68 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		7BBE6BCE181BE92A004E1C68 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BBE6BCF181BE92A004E1C68 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7BBE6BD3181BE92A004E1C68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7BBE6BD4181BE92A004E1C68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7BBE6BD6181BE92A004E1C68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "My Miles & More/My Miles & More-Prefix.pch";
+				INFOPLIST_FILE = "My Miles & More/My Miles & More-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ED88D080-DFBD-426A-AE67-E85B07FAC9FB";
+				VALID_ARCHS = "arm64 armv7s armv7";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7BBE6BD7181BE92A004E1C68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "My Miles & More/My Miles & More-Prefix.pch";
+				INFOPLIST_FILE = "My Miles & More/My Miles & More-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ED88D080-DFBD-426A-AE67-E85B07FAC9FB";
+				VALID_ARCHS = "arm64 armv7s armv7";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7BBE6BD9181BE92A004E1C68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/My Miles & More.app/My Miles & More";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "My Miles & More/My Miles & More-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "My Miles & MoreTests/My Miles & MoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7BBE6BDA181BE92A004E1C68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/My Miles & More.app/My Miles & More";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "My Miles & More/My Miles & More-Prefix.pch";
+				INFOPLIST_FILE = "My Miles & MoreTests/My Miles & MoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BBE6B9B181BE92A004E1C68 /* Build configuration list for PBXProject "My Miles & More" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BBE6BD3181BE92A004E1C68 /* Debug */,
+				7BBE6BD4181BE92A004E1C68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BBE6BD5181BE92A004E1C68 /* Build configuration list for PBXNativeTarget "My Miles & More" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BBE6BD6181BE92A004E1C68 /* Debug */,
+				7BBE6BD7181BE92A004E1C68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BBE6BD8181BE92A004E1C68 /* Build configuration list for PBXNativeTarget "My Miles & MoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BBE6BD9181BE92A004E1C68 /* Debug */,
+				7BBE6BDA181BE92A004E1C68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7BBE6B98181BE92A004E1C68 /* Project object */;
+}
