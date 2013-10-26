@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */; };
+		7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75789181C48F000B69F3E /* DescriptionViewController.m */; };
+		7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */; };
+		7BB7578E181C4B8C00B69F3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB7578D181C4B8C00B69F3E /* MapKit.framework */; };
+		7BB75791181C58BF00B69F3E /* UIColor+iOS7Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */; };
 		7BBE6BA4181BE92A004E1C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA3181BE92A004E1C68 /* Foundation.framework */; };
 		7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */; };
 		7BBE6BA8181BE92A004E1C68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA7181BE92A004E1C68 /* UIKit.framework */; };
@@ -52,6 +56,12 @@
 
 /* Begin PBXFileReference section */
 		7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		7BB75788181C48F000B69F3E /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
+		7BB75789181C48F000B69F3E /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
+		7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionViewController.xib; sourceTree = "<group>"; };
+		7BB7578D181C4B8C00B69F3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7BB7578F181C58BF00B69F3E /* UIColor+iOS7Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+iOS7Colors.h"; sourceTree = "<group>"; };
+		7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+iOS7Colors.m"; sourceTree = "<group>"; };
 		7BBE6BA0181BE92A004E1C68 /* My Miles & More.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Miles & More.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBE6BA3181BE92A004E1C68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -108,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA480E12181C5259005630AB /* MapKit.framework in Frameworks */,
+				7BB7578E181C4B8C00B69F3E /* MapKit.framework in Frameworks */,
 				7BE21800181BFA50006DE7A6 /* CoreLocation.framework in Frameworks */,
 				7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */,
 				7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */,
@@ -175,10 +185,15 @@
 				7BBE6BBC181BE92A004E1C68 /* ViewController.m */,
 				7BC25620181C031200C7EF08 /* BeaconManager.h */,
 				7BC25621181C031200C7EF08 /* BeaconManager.m */,
+				7BB75788181C48F000B69F3E /* DescriptionViewController.h */,
+				7BB75789181C48F000B69F3E /* DescriptionViewController.m */,
+				7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */,
 				7BBE6BBE181BE92A004E1C68 /* Images.xcassets */,
 				7BBE6BAA181BE92A004E1C68 /* Supporting Files */,
 				AA480DEA181C197F005630AB /* NearbyStoresViewController.h */,
 				AA480DEB181C197F005630AB /* NearbyStoresViewController.m */,
+				7BB7578F181C58BF00B69F3E /* UIColor+iOS7Colors.h */,
+				7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */,
 				AA480E0B181C3EF5005630AB /* Store.h */,
 				AA480E0C181C3EF5005630AB /* Store.m */,
 				AA480E0E181C5193005630AB /* MapViewAnnotation.h */,
@@ -336,6 +351,7 @@
 				7BBE6BBA181BE92A004E1C68 /* Main_iPad.storyboard in Resources */,
 				7BBE6BBF181BE92A004E1C68 /* Images.xcassets in Resources */,
 				7BBE6BB7181BE92A004E1C68 /* Main_iPhone.storyboard in Resources */,
+				7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */,
 				7BBE6BAE181BE92A004E1C68 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,10 +381,12 @@
 				AA480E09181C2569005630AB /* AFXMLRequestOperation.m in Sources */,
 				7BBE6BBD181BE92A004E1C68 /* ViewController.m in Sources */,
 				7BC25622181C031200C7EF08 /* BeaconManager.m in Sources */,
+				7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */,
 				7BBE6BB4181BE92A004E1C68 /* AppDelegate.m in Sources */,
 				7BBE6BB0181BE92A004E1C68 /* main.m in Sources */,
 				AA480E05181C2569005630AB /* AFJSONRequestOperation.m in Sources */,
 				AA480DEC181C197F005630AB /* NearbyStoresViewController.m in Sources */,
+				7BB75791181C58BF00B69F3E /* UIColor+iOS7Colors.m in Sources */,
 				AA480E07181C2569005630AB /* AFPropertyListRequestOperation.m in Sources */,
 				AA480E06181C2569005630AB /* AFNetworkActivityIndicatorManager.m in Sources */,
 			);

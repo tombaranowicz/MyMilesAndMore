@@ -31,11 +31,6 @@
 }
 
 #pragma mark CBPeripheralManagerDelegate methods
-- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
-{
-    NSLog(@"willRestore");
-}
-
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
 {
     NSLog(@"didRetrieve");

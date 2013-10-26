@@ -10,7 +10,7 @@
 #import "ViewController.h"
 #import "BeaconManager.h"
 #import "ViewController.h"
-
+#import "DescriptionViewController.h"
 #define app_uuid @"B929D963-23FA-8D33-7039-D000B9B8FA10"
 
 @interface AppDelegate()
@@ -22,7 +22,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UINavigationController *rootController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    DescriptionViewController* descriptionViewController = [DescriptionViewController new];
+    
+    
+    UINavigationController *rootController = [[UINavigationController alloc] initWithRootViewController:descriptionViewController];
     rootController.navigationBar.hidden = NO;
     self.window.rootViewController = rootController;
 
