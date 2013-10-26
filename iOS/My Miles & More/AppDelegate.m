@@ -7,16 +7,12 @@
 //
 
 #import "AppDelegate.h"
-<<<<<<< HEAD
 #import "ViewController.h"
-
-=======
 #import "BeaconManager.h"
 #import "ViewController.h"
 
 #define app_uuid @"B929D963-23FA-8D33-7039-D000B9B8FA10"
 
->>>>>>> f8a3204c36808575308816466549e9a004f5edff
 @interface AppDelegate()
 @property (nonatomic) BeaconManager *beaconManager;
 
