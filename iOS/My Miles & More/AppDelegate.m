@@ -7,9 +7,8 @@
 //
 
 #import "AppDelegate.h"
-<<<<<<< HEAD
 #import "ViewController.h"
-=======
+
 @interface AppDelegate()
 @property (nonatomic) CBCentralManager *btManager;
 @property (nonatomic) NSMutableArray *askedUUIDsArray;
@@ -20,7 +19,6 @@
 @property (nonatomic) CBPeripheralManager* peripheralManager;
 
 @end
->>>>>>> 036e1cfd1a33062048ebade7173717d64bad3819
 
 @implementation AppDelegate
 
