@@ -3,10 +3,11 @@ package com.techcrunch.milesandmore;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -27,6 +28,9 @@ public class TagDetails extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_tag_details);
+		
+		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFFFFBD26));
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mTag = getIntent().getParcelableExtra("tag");
 
@@ -66,5 +70,12 @@ public class TagDetails extends Activity {
 				startActivity(intent);
 			}
 		});
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == android.R.id.home) {
+			finish();
+		}
+		return true;
 	}
 }
