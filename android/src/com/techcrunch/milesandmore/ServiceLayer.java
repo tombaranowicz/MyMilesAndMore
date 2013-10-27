@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -94,10 +95,20 @@ public class ServiceLayer extends Service implements BitmapCallback {
 				intent.putExtra("tag", tagData.getTag());
 				sendBroadcast(intent);
 			} else {
+				Log.d(TAG, "Beacon -----------");
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
+				builder.setSmallIcon(R.drawable.ic_launcher);
+				builder.setAutoCancel(true);
+				builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+				builder.setContentTitle(tagData.getTag().getName());
+				builder.setContentText(tagData.getTag().getDescription());
 				Intent intent = new Intent(ServiceLayer.this, DeviceList.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.putExtra("tagDialog", tagData.getTag());
-				startActivity(intent);
+				PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+				builder.setContentIntent(pendingIntent);
+				NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+				manager.notify("MAndM", 34, builder.build());
 			}
 		}
 	};
@@ -111,7 +122,6 @@ public class ServiceLayer extends Service implements BitmapCallback {
 		mGcmRegId = getSharedPreferences("preference", 0).getString("deviceToken", null);
 		RestAdapter adapter = new RestAdapter.Builder().setServer("http://198.245.54.12:8000/").build();
 		mBlouService = adapter.create(ServiceInterface.class);
-		initialize();
 	}
 
 	public void onDestroy() {
@@ -141,6 +151,7 @@ public class ServiceLayer extends Service implements BitmapCallback {
 				}
 			}
 		}
+		initialize();
 		return START_STICKY;
 	}
 
@@ -171,11 +182,8 @@ public class ServiceLayer extends Service implements BitmapCallback {
 			Log.e(TAG, "Unable to obtain a BluetoothAdapter.");
 			return false;
 		}
-		
-		mBluetoothAdapter.enable();
 
 		mHandler.sendEmptyMessageDelayed(MyHandler.START_SCANNING, 500);
-		mHandler.sendEmptyMessageDelayed(MyHandler.STOP_SCANNING, 120000);
 
 		return true;
 	}
@@ -196,14 +204,8 @@ public class ServiceLayer extends Service implements BitmapCallback {
 			if (service != null) {
 				switch (msg.what) {
 				case START_SCANNING:
+					Log.i(TAG, "Start scanning");
 					service.mBluetoothAdapter.startLeScan(service.mScanCallback);
-					break;
-				case STOP_SCANNING:
-					service.broadcastUpdate(ACTION_STOP_SCANNING);
-					service.mBluetoothAdapter.disable();
-					service.mBluetoothAdapter.enable();
-					service.mHandler.sendEmptyMessageDelayed(START_SCANNING, 1000);
-					service.mHandler.sendEmptyMessageDelayed(STOP_SCANNING, 120000);
 					break;
 				default:
 					break;
