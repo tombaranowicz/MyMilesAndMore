@@ -4,5 +4,21 @@
     <string name="app_name">MilesAndMore</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="mojxml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; 
+&lt;company&gt;
+&lt;article class=&quot;partner&quot; data-partner-id=&quot;4&quot; title=&quot;SWAROVSKI&quot;&gt;
+    &lt;header&gt;
+      &lt;div class=&quot;logo&quot;&gt;
+        &lt;img src=&quot;/img/thumbs/187e70cb278c0fd992ad0bf13dd92e41.png?1375953979&quot; alt=&quot;SWAROVSKI&quot; width=&quot;60&quot; height=&quot;60&quot; /&gt;
+      &lt;/div&gt;
+      &lt;h4&gt;SWAROVSKI&lt;/h4&gt;
+      &lt;p class=&quot;partner-info&quot;&gt;
+        &lt;span class=&quot;partner-store-count&quot;&gt;3x&lt;/span&gt;,
+&lt;span class=&quot;nearest-partner-distance&quot;&gt;
+ab &amp;lt;1km&lt;/span&gt;
+      &lt;/p&gt;
+    &lt;/header&gt;
+    &lt;/article&gt;
+    &lt;/company&gt;</string>
 
 </resources>

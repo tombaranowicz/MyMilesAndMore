@@ -14,7 +14,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.ParcelUuid;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,22 +23,26 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gcm.GCMRegistrar;
+import com.techcrunch.milesandmore.api.Company;
+
 public class DeviceList extends Activity {
 	
 	private static final String TAG = "BlouApp";
 	
-	private BlouService mService;
+	private ServiceLayer mService;
 	private boolean mConnected = false;
 	
 	private ListView mListView;
 	private List<BluetoothDevice> mGattServices = new ArrayList<BluetoothDevice>();
+	private List<Company> mCompanies = new ArrayList<Company>();
 	private BaseAdapter mListAdapter;
 	
 	private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
-        	mService = ((BlouService.MyBinder) service).getService();
+        	mService = ((ServiceLayer.MyBinder) service).getService();
 			Log.i(TAG, "Connected");
 			mGattServices.clear();
             mGattServices.addAll(mService.getDevices());
@@ -50,11 +54,12 @@ public class DeviceList extends Activity {
         }
     };
     
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mScanReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (BlouService.ACTION_NEW_DEVICE.equals(action)) {
+            if (ServiceLayer.ACTION_NEW_DEVICE.equals(action)) {
+            	Log.d(TAG, "Add device");
             	mGattServices.clear();
             	mGattServices.addAll(mService.getDevices());
             	mListAdapter.notifyDataSetChanged();
@@ -67,17 +72,19 @@ public class DeviceList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_device_list);
 		mListView = (ListView) findViewById(R.id.list);
-		mListAdapter = new GattServiceAdapter();
+		mListAdapter = new DeviceAdapter();
 		mListView.setAdapter(mListAdapter);
-		startService(new Intent(this, BlouService.class));
+		startService(new Intent(this, ServiceLayer.class));
+		
+		registerGCM();
 	}
 	
 	@Override
 	public void onStart() {
 		super.onStart();
 		if(mService == null) {
-			bindService(new Intent(this, BlouService.class), mServiceConnection, Context.BIND_AUTO_CREATE);
-			registerReceiver(mGattUpdateReceiver, getIntentFilter());
+			bindService(new Intent(this, ServiceLayer.class), mServiceConnection, Context.BIND_AUTO_CREATE);
+			registerReceiver(mScanReceiver, getIntentFilter());
 		}
 	}
 	
@@ -86,8 +93,28 @@ public class DeviceList extends Activity {
 		super.onStop();
 		if(mService != null) {
 			unbindService(mServiceConnection);
-			unregisterReceiver(mGattUpdateReceiver);
+			unregisterReceiver(mScanReceiver);
 			mService = null;
+		}
+	}
+	
+	private void registerGCM() {
+		try {
+			GCMRegistrar.checkDevice(this);
+			GCMRegistrar.checkManifest(this);
+			final String regId = GCMRegistrar.getRegistrationId(this);
+			if (TextUtils.isEmpty(regId)) {
+				Log.d(TAG, "Send regId request");
+				GCMRegistrar.register(this, "1019372707521");
+			} else {
+				getSharedPreferences("preference", 0).edit().putString("deviceToken", regId)
+						.commit();
+				if (regId == null && mService!=null) {
+					mService.sendGcmDeviceToken(regId);
+				}
+			}
+		} catch (UnsupportedOperationException e) {
+			Log.e(TAG, e.getLocalizedMessage());
 		}
 	}
 
@@ -100,11 +127,12 @@ public class DeviceList extends Activity {
 	
 	private IntentFilter getIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BlouService.ACTION_NEW_DEVICE);
+        intentFilter.addAction(ServiceLayer.ACTION_NEW_DEVICE);
+        intentFilter.addAction(ServiceLayer.ACTION_COMPANY);
         return intentFilter;
     }
 	
-	private class GattServiceAdapter extends BaseAdapter {
+	private class DeviceAdapter extends BaseAdapter {
 
 		@Override
 		public int getCount() {
