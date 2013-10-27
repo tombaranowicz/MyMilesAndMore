@@ -32,6 +32,8 @@
     self.beaconManager = [[BeaconManager alloc] initWithUUID:app_uuid];
     [self.beaconManager setDelegate:self];
     
+    self.window.rootViewController = [ViewController new];
+    
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application
