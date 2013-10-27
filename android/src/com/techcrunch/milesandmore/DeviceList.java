@@ -5,30 +5,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.gcm.GCMRegistrar;
 import com.techcrunch.milesandmore.api.Company;
+import com.techcrunch.milesandmore.api.Tag;
 
 public class DeviceList extends Activity {
 	
@@ -53,8 +54,7 @@ public class DeviceList extends Activity {
         public void onServiceConnected(ComponentName componentName, IBinder service) {
         	mService = ((ServiceLayer.MyBinder) service).getService();
 			Log.i(TAG, "Connected");
-			mGattServices.clear();
-            mGattServices.addAll(mService.getDevices());
+			mService.setConnected(true);
         }
 
         @Override
@@ -71,6 +71,18 @@ public class DeviceList extends Activity {
             	Log.d(TAG, "Add device");
             	mGattServices.clear();
             	mGattServices.addAll(mService.getDevices());
+            } else if(ServiceLayer.ACTION_START_SCANNING.equals(action)) {
+            	Log.d(TAG, "Refreshing");
+            	setProgressBarIndeterminateVisibility(true);
+            	setProgressBarIndeterminate(true);
+            } else if(ServiceLayer.ACTION_STOP_SCANNING.equals(action)) {
+            	Log.d(TAG, "Stop refreshing");
+            	setProgressBarIndeterminateVisibility(false);
+            	setProgressBarIndeterminate(false);
+            } else if(ServiceLayer.ACTION_NEW_TAG.equals(action)) {
+            	Tag tag = intent.getParcelableExtra("tag");
+            	RegisterToShop dialog = RegisterToShop.newInstance(tag);
+            	dialog.show(getFragmentManager(), "dialog");
             }
         }
     };
@@ -81,6 +93,7 @@ public class DeviceList extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+	    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS); 
 		super.onCreate(savedInstanceState);
 
 		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFFFFBD26));
@@ -112,6 +125,11 @@ public class DeviceList extends Activity {
 			intent.setClass(this, TagDetails.class);
 			setIntent(new Intent());
 			startActivity(intent);
+		} else if(getIntent().hasExtra("tagDialog")) {
+			Tag tag = getIntent().getParcelableExtra("tagDialog");
+        	RegisterToShop dialog = RegisterToShop.newInstance(tag);
+        	dialog.show(getFragmentManager(), "dialog");
+			setIntent(new Intent());
 		}
 	}
 	
@@ -119,6 +137,7 @@ public class DeviceList extends Activity {
 	public void onStop() {
 		super.onStop();
 		if(mService != null) {
+			mService.setConnected(false);
 			unbindService(mServiceConnection);
 			unregisterReceiver(mScanReceiver);
 			mService = null;
@@ -147,7 +166,6 @@ public class DeviceList extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.device_list, menu);
 		return true;
 	}
@@ -156,47 +174,38 @@ public class DeviceList extends Activity {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ServiceLayer.ACTION_NEW_DEVICE);
         intentFilter.addAction(ServiceLayer.ACTION_COMPANY);
+        intentFilter.addAction(ServiceLayer.ACTION_START_SCANNING);
+        intentFilter.addAction(ServiceLayer.ACTION_STOP_SCANNING);
+        intentFilter.addAction(ServiceLayer.ACTION_NEW_TAG);
         return intentFilter;
     }
 	
-	private class DeviceAdapter extends BaseAdapter {
+	public static class RegisterToShop extends DialogFragment {
 
-		@Override
-		public int getCount() {
-			return mGattServices.size();
-		}
+	    public static RegisterToShop newInstance(Tag tag) {
+	    	RegisterToShop frag = new RegisterToShop();
+	        Bundle args = new Bundle();
+	        args.putParcelable("tag", tag);
+	        frag.setArguments(args);
+	        return frag;
+	    }
 
-		@Override
-		public Object getItem(int position) {
-			return mGattServices.get(position);
-		}
+	    @Override
+	    public Dialog onCreateDialog(Bundle savedInstanceState) {
+	        final Tag tag = getArguments().getParcelable("tag");
 
-		@Override
-		public long getItemId(int position) {
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup group) {
-			DeviceViewHolder holder = new DeviceViewHolder();
-			if(convertView == null) {
-				convertView = getLayoutInflater().inflate(R.layout.list_device_item, null);
-				holder = new DeviceViewHolder();
-				holder.title = (TextView) convertView.findViewById(R.id.device_title);
-				holder.address = (TextView) convertView.findViewById(R.id.device_address);
-				convertView.setTag(holder);
-			} else {
-				holder = (DeviceViewHolder) convertView.getTag();
-			}
-			holder.title.setText(mGattServices.get(position).getName());
-			holder.address.setText(mGattServices.get(position).getAddress());
-			return convertView;
-		}
-	}
-	
-	private class DeviceViewHolder {
-		TextView title;
-		TextView address;
+	        return new AlertDialog.Builder(getActivity())
+	                .setIcon(R.drawable.ic_launcher)
+	                .setTitle("Offer registration")
+	                .setMessage(String.format("You are near %s (Miles and More partner). Do you want to receive an information about offers?", tag.getName()))
+	                .setPositiveButton(android.R.string.ok,
+	                    new DialogInterface.OnClickListener() {
+	                        public void onClick(DialogInterface dialog, int whichButton) {
+	                            ((DeviceList)getActivity()).mService.registerTag(tag);
+	                        }
+	                    }
+	                ).setNegativeButton(android.R.string.cancel, null).create();
+	    }
 	}
 
 }

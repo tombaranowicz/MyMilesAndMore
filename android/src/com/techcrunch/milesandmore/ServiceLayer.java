@@ -58,7 +58,10 @@ public class ServiceLayer extends Service implements BitmapCallback {
 	public final static String ACTION_COMPANY = "com.techcrunch.milesandmore.ACTION_COMPANY";
 	public final static String ACTION_NOTIFICATION = "com.techcrunch.milesandmore.ACTION_NOTIFICATION";
 	public final static String ACTION_REGISTRATION = "com.techcrunch.milesandmore.ACTION_REGISTRATION";
-	
+	public final static String ACTION_START_SCANNING = "com.techcrunch.milesandmore.ACTION_START_SCANNING";
+	public final static String ACTION_STOP_SCANNING = "com.techcrunch.milesandmore.ACTION_STOP_SCANNING";
+	public final static String ACTION_NEW_TAG = "com.techcrunch.milesandmore.ACTION_NEW_TAG";
+
 	private TagData mTagData;
 	private Tag mTag;
 
@@ -93,24 +96,20 @@ public class ServiceLayer extends Service implements BitmapCallback {
 		@Override
 		public void success(TagData tagData, Response response) {
 			Log.i(TAG, response.toString());
-			AddTag tag = new AddTag(tagData.getTag().getId(), getSharedPreferences("preference", 0).getString("deviceToken", null));
-			mBlouService.register(tag, new Callback<Response>() {
-				
-				@Override
-				public void success(Response arg0, Response arg1) {
-					Toast.makeText(getBaseContext(), "Registered", Toast.LENGTH_SHORT).show();
-				}
-				
-				@Override
-				public void failure(RetrofitError arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-			Toast.makeText(getBaseContext(), "Find " + tagData.getTag().getName(), Toast.LENGTH_SHORT).show();
+			if (mConnected) {
+				Intent intent = new Intent(ACTION_NEW_TAG);
+				intent.putExtra("tag", tagData.getTag());
+				sendBroadcast(intent);
+			} else {
+				Intent intent = new Intent(ServiceLayer.this, DeviceList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.putExtra("tagDialog", tagData.getTag());
+				startActivity(intent);
+			}
 		}
 	};
 
+	private boolean mConnected = false;
 	private List<BluetoothDevice> mDevices = new ArrayList<BluetoothDevice>();
 
 	@Override
@@ -119,11 +118,13 @@ public class ServiceLayer extends Service implements BitmapCallback {
 		mGcmRegId = getSharedPreferences("preference", 0).getString("deviceToken", null);
 		RestAdapter adapter = new RestAdapter.Builder().setServer("http://198.245.54.12:8000/").build();
 		mBlouService = adapter.create(ServiceInterface.class);
+		initialize();
 	}
 
 	public void onDestroy() {
 		super.onDestroy();
 		mBluetoothAdapter.stopLeScan(mScanCallback);
+		mBluetoothAdapter.disable();
 	}
 
 	@Override
@@ -143,13 +144,15 @@ public class ServiceLayer extends Service implements BitmapCallback {
 				if (mTag.getImageUrl() == null) {
 					showInputStyleNotification();
 				} else {
-					BitmapCache.getInstance(getBaseContext()).loadImage(
-							mTag.getImageUrl(), this);
+					BitmapCache.getInstance(getApplicationContext()).loadImage(mTag.getImageUrl(), this);
 				}
 			}
 		}
-		initialize();
 		return START_STICKY;
+	}
+
+	public void setConnected(boolean connected) {
+		this.mConnected = connected;
 	}
 
 	public List<BluetoothDevice> getDevices() {
@@ -161,7 +164,7 @@ public class ServiceLayer extends Service implements BitmapCallback {
 		sendBroadcast(intent);
 	}
 
-	public boolean initialize() {
+	private boolean initialize() {
 		if (mBluetoothManager == null) {
 			mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
 			if (mBluetoothManager == null) {
@@ -175,8 +178,11 @@ public class ServiceLayer extends Service implements BitmapCallback {
 			Log.e(TAG, "Unable to obtain a BluetoothAdapter.");
 			return false;
 		}
+		
+		mBluetoothAdapter.enable();
 
-		mHandler.sendMessageDelayed(Message.obtain(null, MyHandler.START_SCANNING), 500);
+		mHandler.sendEmptyMessageDelayed(MyHandler.START_SCANNING, 500);
+		mHandler.sendEmptyMessageDelayed(MyHandler.STOP_SCANNING, 120000);
 
 		return true;
 	}
@@ -197,16 +203,14 @@ public class ServiceLayer extends Service implements BitmapCallback {
 			if (service != null) {
 				switch (msg.what) {
 				case START_SCANNING:
-					if (service.mBluetoothAdapter.isEnabled()) {
-						service.mBluetoothAdapter.startLeScan(service.mScanCallback);
-					} else {
-						service.mBluetoothAdapter.enable();
-						service.mHandler.sendMessageDelayed(Message.obtain(msg), 500);
-						Log.d(TAG, "Resend message");
-					}
+					service.mBluetoothAdapter.startLeScan(service.mScanCallback);
 					break;
 				case STOP_SCANNING:
-					service.mBluetoothAdapter.stopLeScan(service.mScanCallback);
+					service.broadcastUpdate(ACTION_STOP_SCANNING);
+					service.mBluetoothAdapter.disable();
+					service.mBluetoothAdapter.enable();
+					service.mHandler.sendEmptyMessageDelayed(START_SCANNING, 1000);
+					service.mHandler.sendEmptyMessageDelayed(STOP_SCANNING, 120000);
 					break;
 				default:
 					break;
@@ -217,6 +221,23 @@ public class ServiceLayer extends Service implements BitmapCallback {
 
 	public void sendGcmDeviceToken(String deviceToken) {
 
+	}
+
+	public void registerTag(Tag tag) {
+		AddTag addTag = new AddTag(tag.getId(), getSharedPreferences("preference", 0).getString("deviceToken", null));
+		mBlouService.register(addTag, new Callback<Response>() {
+
+			@Override
+			public void success(Response arg0, Response arg1) {
+				Toast.makeText(getBaseContext(), "You are registered to offer list", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void failure(RetrofitError arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	public class MyBinder extends Binder {
@@ -233,43 +254,6 @@ public class ServiceLayer extends Service implements BitmapCallback {
 		return mBinder;
 	}
 
-	private class PartnersDownloader extends AsyncTask<String, Void, Object> {
-
-		@Override
-		protected Object doInBackground(String... url) {
-			HttpGet get = new HttpGet(url[0]);
-			AndroidHttpClient client = AndroidHttpClient.newInstance("Windows");
-			try {
-				HttpResponse response = client.execute(get);
-				String result = EntityUtils.toString(response.getEntity());
-				String parsed = result.substring(result.indexOf("<article"), result.lastIndexOf("</article>") + 10);
-
-				return parsed;
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-		@Override
-		public void onPostExecute(Object object) {
-			try {
-				Log.i(TAG, "Start parse");
-				List<Company> companies = MMXmlParser.parseCompanies((String) object);
-				for (Company company : companies) {
-					Intent intent = new Intent(ACTION_COMPANY);
-					intent.putExtra("company", company);
-					sendBroadcast(intent);
-				}
-				Log.i(TAG, "End parse ");
-			} catch (Exception e) {
-				Log.e(TAG, e.getLocalizedMessage());
-			}
-		}
-
-	}
 	@Override
 	public void onComplete(Bitmap bitmap) {
 		if (bitmap == null) {
@@ -281,18 +265,18 @@ public class ServiceLayer extends Service implements BitmapCallback {
 
 	private void showInputStyleNotification() {
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-		builder.setSmallIcon(R.drawable.ic_launcher);
 		builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
 		builder.setAutoCancel(true);
+		builder.setSmallIcon(R.drawable.ic_launcher);
 		builder.setContentTitle(mTagData.getTitle());
 		builder.setContentText(mTagData.getDescription());
 		builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-		if (mTag.getLatitude()>0 && mTag.getLongitude()>0) {
+		if (mTag.getLatitude() > 0 && mTag.getLongitude() > 0) {
 			String uri = String.format(Locale.ENGLISH, "geo:%f,%f?q=%f,%f(%s)", mTag.getLatitude(), mTag.getLongitude(),
 					mTag.getLatitude(), mTag.getLongitude(), mTag.getName());
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-			builder.addAction(R.drawable.ic_launcher, "Maps", pendingIntent);
+			builder.addAction(R.drawable.ic_maps, "Maps", pendingIntent);
 		}
 
 		NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
@@ -308,18 +292,18 @@ public class ServiceLayer extends Service implements BitmapCallback {
 
 	private void showPictureNotification(Bitmap bitmap) {
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-		builder.setSmallIcon(R.drawable.ic_launcher);
 		builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+		builder.setSmallIcon(R.drawable.ic_launcher);
 		builder.setAutoCancel(true);
 		builder.setContentTitle(mTagData.getTitle());
 		builder.setContentText(mTagData.getDescription());
 		builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-		if (mTag.getLatitude()>0 && mTag.getLongitude()>0) {
+		if (mTag.getLatitude() > 0 && mTag.getLongitude() > 0) {
 			String uri = String.format(Locale.ENGLISH, "geo:%f,%f?q=%f,%f(%s)", mTag.getLatitude(), mTag.getLongitude(),
 					mTag.getLatitude(), mTag.getLongitude(), mTag.getName());
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-			builder.addAction(R.drawable.ic_launcher, "Maps", pendingIntent);
+			builder.addAction(R.drawable.ic_maps, "Maps", pendingIntent);
 		}
 
 		NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle();
@@ -332,6 +316,7 @@ public class ServiceLayer extends Service implements BitmapCallback {
 	}
 
 	private void showNotification(NotificationCompat.Builder builder) {
+		Log.d(TAG, "Show notification");
 		Intent messageIntent = new Intent(this, DeviceList.class);
 		messageIntent.putExtra("tag", mTag);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -343,7 +328,7 @@ public class ServiceLayer extends Service implements BitmapCallback {
 	@Override
 	public void onProgress(int i) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
