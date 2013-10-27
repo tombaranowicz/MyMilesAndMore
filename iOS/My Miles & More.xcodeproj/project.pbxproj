@@ -11,6 +11,7 @@
 		7B7EF591181C7D5500CB9B0C /* UIViewController+dismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */; };
 		7B7EF5F5181C964E00CB9B0C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7EF5F4181C964E00CB9B0C /* MapKit.framework */; };
 		7B7EF5FC181CB59400CB9B0C /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B7EF5FB181CB59400CB9B0C /* ViewController.xib */; };
+		7B7EF5FE181CF9FA00CB9B0C /* 744px-Miles_&_More_Lufthansa_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7EF5FD181CF9FA00CB9B0C /* 744px-Miles_&_More_Lufthansa_Logo@2x.png */; };
 		7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */; };
 		7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75789181C48F000B69F3E /* DescriptionViewController.m */; };
 		7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */; };
@@ -61,6 +62,7 @@
 		7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+dismiss.m"; sourceTree = "<group>"; };
 		7B7EF5F4181C964E00CB9B0C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B7EF5FB181CB59400CB9B0C /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		7B7EF5FD181CF9FA00CB9B0C /* 744px-Miles_&_More_Lufthansa_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "744px-Miles_&_More_Lufthansa_Logo@2x.png"; sourceTree = "<group>"; };
 		7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		7BB75788181C48F000B69F3E /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
 		7BB75789181C48F000B69F3E /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				7BBE6BAC181BE92A004E1C68 /* InfoPlist.strings */,
 				7BBE6BAF181BE92A004E1C68 /* main.m */,
 				7BBE6BB1181BE92A004E1C68 /* My Miles & More-Prefix.pch */,
+				7B7EF5FD181CF9FA00CB9B0C /* 744px-Miles_&_More_Lufthansa_Logo@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BBE6BBF181BE92A004E1C68 /* Images.xcassets in Resources */,
+				7B7EF5FE181CF9FA00CB9B0C /* 744px-Miles_&_More_Lufthansa_Logo@2x.png in Resources */,
 				7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */,
 				7B7EF5FC181CB59400CB9B0C /* ViewController.xib in Resources */,
 				7BBE6BAE181BE92A004E1C68 /* InfoPlist.strings in Resources */,
