@@ -33,6 +33,7 @@ exports.add_tag = function(req, res) { //POST// params tag_id, name, description
       return res.send({'error':'object_exists'});
     } else {
       var tagObject = new TagObject(req.body);
+      tagObject.android_devices = new Array();
       tagObject.save(function (err) {
         if (err) res.send({'error':err});
         return res.send({'object':tagObject});
@@ -104,12 +105,15 @@ exports.add_android_device = function(req, res) {  //POST// params tag_id, andro
     if (!object) {
       return res.send({'error':'no object'});
     } else {
-      object.android_devices.addToSet(req.body.android_device_token);
-      object.save(function(err){
-        if (!err) {
-          return res.send({'ok':req.body.android_device_token});
-        }
-      });
+      if (typeof req.body.android_device_token != "undefined") {
+        console.log('token: ' + req.body.android_device_token);
+        object.android_devices.addToSet(req.body.android_device_token);
+        object.save(function(err){
+          if (!err) {
+            return res.send({'ok':req.body.android_device_token});
+          }
+        });
+      }
     }
   });
 }
