@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B7EF58E181C777400CB9B0C /* BeaconObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF58D181C777400CB9B0C /* BeaconObject.m */; };
+		7B7EF591181C7D5500CB9B0C /* UIViewController+dismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */; };
 		7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */; };
+		7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75789181C48F000B69F3E /* DescriptionViewController.m */; };
+		7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */; };
+		7BB7578E181C4B8C00B69F3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB7578D181C4B8C00B69F3E /* MapKit.framework */; };
+		7BB75791181C58BF00B69F3E /* UIColor+iOS7Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */; };
 		7BBE6BA4181BE92A004E1C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA3181BE92A004E1C68 /* Foundation.framework */; };
 		7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */; };
 		7BBE6BA8181BE92A004E1C68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA7181BE92A004E1C68 /* UIKit.framework */; };
@@ -25,6 +31,18 @@
 		7BBE6BD2181BE92A004E1C68 /* My_Miles___MoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE6BD1181BE92A004E1C68 /* My_Miles___MoreTests.m */; };
 		7BC25622181C031200C7EF08 /* BeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC25621181C031200C7EF08 /* BeaconManager.m */; };
 		7BE21800181BFA50006DE7A6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE217FF181BFA50006DE7A6 /* CoreLocation.framework */; };
+		AA480DEC181C197F005630AB /* NearbyStoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DEB181C197F005630AB /* NearbyStoresViewController.m */; };
+		AA480E02181C2569005630AB /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DF0181C2569005630AB /* AFHTTPClient.m */; };
+		AA480E03181C2569005630AB /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DF2181C2569005630AB /* AFHTTPRequestOperation.m */; };
+		AA480E04181C2569005630AB /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DF4181C2569005630AB /* AFImageRequestOperation.m */; };
+		AA480E05181C2569005630AB /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DF6181C2569005630AB /* AFJSONRequestOperation.m */; };
+		AA480E06181C2569005630AB /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DF8181C2569005630AB /* AFNetworkActivityIndicatorManager.m */; };
+		AA480E07181C2569005630AB /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DFB181C2569005630AB /* AFPropertyListRequestOperation.m */; };
+		AA480E08181C2569005630AB /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DFD181C2569005630AB /* AFURLConnectionOperation.m */; };
+		AA480E09181C2569005630AB /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480DFF181C2569005630AB /* AFXMLRequestOperation.m */; };
+		AA480E0A181C2569005630AB /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480E01181C2569005630AB /* UIImageView+AFNetworking.m */; };
+		AA480E0D181C3EF5005630AB /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480E0C181C3EF5005630AB /* Store.m */; };
+		AA480E10181C5193005630AB /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA480E0F181C5193005630AB /* MapViewAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +56,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B7EF58C181C777400CB9B0C /* BeaconObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconObject.h; sourceTree = "<group>"; };
+		7B7EF58D181C777400CB9B0C /* BeaconObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconObject.m; sourceTree = "<group>"; };
+		7B7EF58F181C7D5500CB9B0C /* UIViewController+dismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+dismiss.h"; sourceTree = "<group>"; };
+		7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+dismiss.m"; sourceTree = "<group>"; };
 		7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		7BB75788181C48F000B69F3E /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
+		7BB75789181C48F000B69F3E /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
+		7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionViewController.xib; sourceTree = "<group>"; };
+		7BB7578D181C4B8C00B69F3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7BB7578F181C58BF00B69F3E /* UIColor+iOS7Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+iOS7Colors.h"; sourceTree = "<group>"; };
+		7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+iOS7Colors.m"; sourceTree = "<group>"; };
 		7BBE6BA0181BE92A004E1C68 /* My Miles & More.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Miles & More.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BBE6BA3181BE92A004E1C68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,6 +90,32 @@
 		7BC25620181C031200C7EF08 /* BeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconManager.h; sourceTree = "<group>"; };
 		7BC25621181C031200C7EF08 /* BeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconManager.m; sourceTree = "<group>"; };
 		7BE217FF181BFA50006DE7A6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AA480DEA181C197F005630AB /* NearbyStoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyStoresViewController.h; sourceTree = "<group>"; };
+		AA480DEB181C197F005630AB /* NearbyStoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyStoresViewController.m; sourceTree = "<group>"; };
+		AA480DEF181C2569005630AB /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		AA480DF0181C2569005630AB /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
+		AA480DF1181C2569005630AB /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		AA480DF2181C2569005630AB /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		AA480DF3181C2569005630AB /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
+		AA480DF4181C2569005630AB /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
+		AA480DF5181C2569005630AB /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		AA480DF6181C2569005630AB /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		AA480DF7181C2569005630AB /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		AA480DF8181C2569005630AB /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		AA480DF9181C2569005630AB /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		AA480DFA181C2569005630AB /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		AA480DFB181C2569005630AB /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		AA480DFC181C2569005630AB /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		AA480DFD181C2569005630AB /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		AA480DFE181C2569005630AB /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		AA480DFF181C2569005630AB /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		AA480E00181C2569005630AB /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		AA480E01181C2569005630AB /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		AA480E0B181C3EF5005630AB /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		AA480E0C181C3EF5005630AB /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		AA480E0E181C5193005630AB /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
+		AA480E0F181C5193005630AB /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		AA480E11181C5259005630AB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB7578E181C4B8C00B69F3E /* MapKit.framework in Frameworks */,
 				7BE21800181BFA50006DE7A6 /* CoreLocation.framework in Frameworks */,
 				7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */,
 				7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */,
@@ -112,6 +167,7 @@
 		7BBE6BA2181BE92A004E1C68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA480E11181C5259005630AB /* MapKit.framework */,
 				7BE217FF181BFA50006DE7A6 /* CoreLocation.framework */,
 				7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */,
 				7BBE6BA3181BE92A004E1C68 /* Foundation.framework */,
@@ -125,6 +181,7 @@
 		7BBE6BA9181BE92A004E1C68 /* My Miles & More */ = {
 			isa = PBXGroup;
 			children = (
+				AA480DED181C2569005630AB /* libs */,
 				7BBE6BB2181BE92A004E1C68 /* AppDelegate.h */,
 				7BBE6BB3181BE92A004E1C68 /* AppDelegate.m */,
 				7BBE6BB5181BE92A004E1C68 /* Main_iPhone.storyboard */,
@@ -133,8 +190,23 @@
 				7BBE6BBC181BE92A004E1C68 /* ViewController.m */,
 				7BC25620181C031200C7EF08 /* BeaconManager.h */,
 				7BC25621181C031200C7EF08 /* BeaconManager.m */,
+				7BB75788181C48F000B69F3E /* DescriptionViewController.h */,
+				7BB75789181C48F000B69F3E /* DescriptionViewController.m */,
+				7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */,
+				7B7EF58C181C777400CB9B0C /* BeaconObject.h */,
+				7B7EF58D181C777400CB9B0C /* BeaconObject.m */,
 				7BBE6BBE181BE92A004E1C68 /* Images.xcassets */,
 				7BBE6BAA181BE92A004E1C68 /* Supporting Files */,
+				AA480DEA181C197F005630AB /* NearbyStoresViewController.h */,
+				AA480DEB181C197F005630AB /* NearbyStoresViewController.m */,
+				7BB7578F181C58BF00B69F3E /* UIColor+iOS7Colors.h */,
+				7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */,
+				AA480E0B181C3EF5005630AB /* Store.h */,
+				AA480E0C181C3EF5005630AB /* Store.m */,
+				AA480E0E181C5193005630AB /* MapViewAnnotation.h */,
+				AA480E0F181C5193005630AB /* MapViewAnnotation.m */,
+				7B7EF58F181C7D5500CB9B0C /* UIViewController+dismiss.h */,
+				7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */,
 			);
 			path = "My Miles & More";
 			sourceTree = "<group>";
@@ -166,6 +238,40 @@
 				7BBE6BCE181BE92A004E1C68 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA480DED181C2569005630AB /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				AA480DEE181C2569005630AB /* AFNetworking */,
+			);
+			path = libs;
+			sourceTree = SOURCE_ROOT;
+		};
+		AA480DEE181C2569005630AB /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				AA480DEF181C2569005630AB /* AFHTTPClient.h */,
+				AA480DF0181C2569005630AB /* AFHTTPClient.m */,
+				AA480DF1181C2569005630AB /* AFHTTPRequestOperation.h */,
+				AA480DF2181C2569005630AB /* AFHTTPRequestOperation.m */,
+				AA480DF3181C2569005630AB /* AFImageRequestOperation.h */,
+				AA480DF4181C2569005630AB /* AFImageRequestOperation.m */,
+				AA480DF5181C2569005630AB /* AFJSONRequestOperation.h */,
+				AA480DF6181C2569005630AB /* AFJSONRequestOperation.m */,
+				AA480DF7181C2569005630AB /* AFNetworkActivityIndicatorManager.h */,
+				AA480DF8181C2569005630AB /* AFNetworkActivityIndicatorManager.m */,
+				AA480DF9181C2569005630AB /* AFNetworking.h */,
+				AA480DFA181C2569005630AB /* AFPropertyListRequestOperation.h */,
+				AA480DFB181C2569005630AB /* AFPropertyListRequestOperation.m */,
+				AA480DFC181C2569005630AB /* AFURLConnectionOperation.h */,
+				AA480DFD181C2569005630AB /* AFURLConnectionOperation.m */,
+				AA480DFE181C2569005630AB /* AFXMLRequestOperation.h */,
+				AA480DFF181C2569005630AB /* AFXMLRequestOperation.m */,
+				AA480E00181C2569005630AB /* UIImageView+AFNetworking.h */,
+				AA480E01181C2569005630AB /* UIImageView+AFNetworking.m */,
+			);
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +360,7 @@
 				7BBE6BBA181BE92A004E1C68 /* Main_iPad.storyboard in Resources */,
 				7BBE6BBF181BE92A004E1C68 /* Images.xcassets in Resources */,
 				7BBE6BB7181BE92A004E1C68 /* Main_iPhone.storyboard in Resources */,
+				7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */,
 				7BBE6BAE181BE92A004E1C68 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,10 +380,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA480E08181C2569005630AB /* AFURLConnectionOperation.m in Sources */,
+				7B7EF58E181C777400CB9B0C /* BeaconObject.m in Sources */,
+				AA480E0A181C2569005630AB /* UIImageView+AFNetworking.m in Sources */,
+				AA480E10181C5193005630AB /* MapViewAnnotation.m in Sources */,
+				AA480E04181C2569005630AB /* AFImageRequestOperation.m in Sources */,
+				AA480E0D181C3EF5005630AB /* Store.m in Sources */,
+				AA480E03181C2569005630AB /* AFHTTPRequestOperation.m in Sources */,
+				AA480E02181C2569005630AB /* AFHTTPClient.m in Sources */,
+				AA480E09181C2569005630AB /* AFXMLRequestOperation.m in Sources */,
 				7BBE6BBD181BE92A004E1C68 /* ViewController.m in Sources */,
 				7BC25622181C031200C7EF08 /* BeaconManager.m in Sources */,
+				7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */,
 				7BBE6BB4181BE92A004E1C68 /* AppDelegate.m in Sources */,
+				7B7EF591181C7D5500CB9B0C /* UIViewController+dismiss.m in Sources */,
 				7BBE6BB0181BE92A004E1C68 /* main.m in Sources */,
+				AA480E05181C2569005630AB /* AFJSONRequestOperation.m in Sources */,
+				AA480DEC181C197F005630AB /* NearbyStoresViewController.m in Sources */,
+				7BB75791181C58BF00B69F3E /* UIColor+iOS7Colors.m in Sources */,
+				AA480E07181C2569005630AB /* AFPropertyListRequestOperation.m in Sources */,
+				AA480E06181C2569005630AB /* AFNetworkActivityIndicatorManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

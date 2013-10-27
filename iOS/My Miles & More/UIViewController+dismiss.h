@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  UIViewController+dismiss.h
 //  My Miles & More
 //
 //  Created by Mateusz Glapiak on 10/26/13.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface UIViewController (dismiss)
+-(void)dismissViewControllerShortcut;
+-(void)insertCloseButton;
 @end

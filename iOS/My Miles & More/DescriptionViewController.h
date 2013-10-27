@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  DescriptionViewController.h
 //  My Miles & More
 //
 //  Created by Mateusz Glapiak on 10/26/13.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class BeaconObject;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface DescriptionViewController : UIViewController
+- (id)initWithBeaconObject:(BeaconObject*)beaconObject;
 @end

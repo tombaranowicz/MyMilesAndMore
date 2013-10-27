@@ -7,14 +7,20 @@
 //
 
 #import "AppDelegate.h"
-@interface AppDelegate()
-@property (nonatomic) CBCentralManager *btManager;
-@property (nonatomic) NSMutableArray *askedUUIDsArray;
-@property (nonatomic,assign) BOOL processing;
-@property (nonatomic) CLLocationManager* locationManager;
-@property (nonatomic) NSUUID* myUUID;
-@property (nonatomic) NSString* myID;
-@property (nonatomic) CBPeripheralManager* peripheralManager;
+#import "ViewController.h"
+#import "BeaconManager.h"
+#import "ViewController.h"
+#import "DescriptionViewController.h"
+#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperation.h"
+#import "BeaconObject.h"
+#import "DescriptionViewController.h"
+#import "UIViewController+dismiss.h"
+
+#define app_uuid @"B929D963-23FA-8D33-7039-D000B9B8FA10"
+
+@interface AppDelegate()<BeaconManagerDelegate>
+@property (nonatomic) BeaconManager *beaconManager;
 
 @end
 
@@ -23,65 +29,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    self.btManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    self.askedUUIDsArray = [NSMutableArray arrayWithObject:@"B929D963-23FA-8D33-7039-D000B9B8FA10"];
-    
-    self.myUUID = [[NSUUID alloc] initWithUUIDString:@"B929D963-23FA-8D33-7039-D000B9B8FA10"];
-    
-    self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
-
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.activityType = CLActivityTypeFitness;
-    
-    [self startMonitoringForStores];
+    self.beaconManager = [[BeaconManager alloc] initWithUUID:app_uuid];
+    [self.beaconManager setDelegate:self];
     
     return YES;
 }
-
-- (void)startMonitoringForStores
-{
-    CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:self.myUUID identifier:self.myID];
-    region.notifyEntryStateOnDisplay = YES;
-    region.notifyOnEntry = YES;
-    region.notifyOnExit = YES;
-    [self.locationManager startMonitoringForRegion:region];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-         didEnterRegion:(CLRegion *)region
-{
-    NSLog(@"ENTERED");
-
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"FAILED");
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-          didExitRegion:(CLRegion *)region
-{
-    // clear notification
-    NSLog(@"EXIT");
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-      didDetermineState:(CLRegionState)state
-              forRegion:(CLRegion *)region
-{
-    NSLog(@"DETERMINE");
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-        didRangeBeacons:(NSArray *)beacons
-               inRegion:(CLBeaconRegion *)region
-{
-    NSLog(@"didRange");
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -109,36 +61,63 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark CBPeripheralManagerDelegate methods
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    NSLog(@"Central Manager did change state %@", central.description);
-    switch (central.state) {
-        case CBCentralManagerStatePoweredOn:
-            [self.btManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
-            break;
-        default:
-            break;
-    }
-}
 
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-    
-    CFUUIDRef theUUID = CFUUIDCreate(NULL);
-    CFStringRef string = CFUUIDCreateString(NULL, peripheral.UUID);
-    CFRelease(theUUID);
-    NSString *UUID = (__bridge_transfer NSString *)string;
-    
-    if([self.askedUUIDsArray containsObject:UUID] && !self.processing){
-        _processing=YES;
-        //[[Server sharedInstance] getSenderByBluetooth:UUID];
-        NSLog(@"FOUND !!!!! UUID %@", UUID);
-    }
-}
 
-- (void)retrievePeripherals:(NSArray *)peripheralUUIDs
+// SERVER
+
+- (void)requestWithUUID:(NSString*)uuid
 {
-    NSLog(@"Retrieve");
+    
+    NSString* urlString = [@"http://198.245.54.12:8000/objects/get_tag_details/" stringByAppendingString:uuid];
+    
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
+                                                            path:urlString
+                                                      parameters:nil];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if([[operation response] statusCode] == 200)
+        {
+        
+            NSString* response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSError *e = nil;
+            NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&e];
+            NSLog(@"%@",response);
+            
+            BeaconObject* beaconObject = [[BeaconObject alloc] initWithDictionary:jsonDict[@"object"]];
+        
+            DescriptionViewController* descriptopnVC = [[DescriptionViewController alloc] initWithBeaconObject:beaconObject];
+            
+            
+            UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:descriptopnVC];
+            
+            [descriptopnVC insertCloseButton];
+            
+            [self.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    [operation start];
+    
 }
 
+#pragma mark - BeaconDelegate
+
+- (void)foundDeviceWithUUID:(NSString *)uuid
+{
+    [self requestWithUUID:uuid];
+}
 
 @end
+
+
