@@ -10,4 +10,5 @@ module.exports = function (app, passport)
 
   app.post('/objects/send_push', public_api.send_push) //POST// params tag_id, title, description
   app.post('/objects/add_android_device', public_api.add_android_device) //POST// params tag_id, android_device_GCM
+  app.post('/objects/delete_android_device', public_api.delete_android_device) //POST// params tag_id, android_device_GCM
 }

@@ -117,3 +117,22 @@ exports.add_android_device = function(req, res) {  //POST// params tag_id, andro
     }
   });
 }
+
+exports.delete_android_device = function(req, res) {  //POST// params tag_id, android_device_token
+  TagObject.findOne({'tag_id' : req.body.tag_id}, function(err, object) {
+    if (err) return res.send({'error':err});
+    if (!object) {
+      return res.send({'error':'no object'});
+    } else {
+      if (typeof req.body.android_device_token != "undefined") {
+        console.log('token: ' + req.body.android_device_token);
+        object.android_devices.pull(req.body.android_device_token);
+        object.save(function(err){
+          if (!err) {
+            return res.send({'ok':req.body.android_device_token});
+          }
+        });
+      }
+    }
+  });
+}
