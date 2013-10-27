@@ -71,13 +71,13 @@
     [self.map setCenterCoordinate:coordinate];
     [self.map setUserInteractionEnabled:NO];
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 0.2*METERS_PER_MILE, 0.2*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 0.25*METERS_PER_MILE, 0.25*METERS_PER_MILE);
     MKCoordinateRegion adjustedRegion = [self.map regionThatFits:viewRegion];
     [self.map setRegion:adjustedRegion animated:YES];
     
     MapViewAnnotation *newAnnotation = [[MapViewAnnotation alloc] initWithTitle:self.descriptionTitle.text andCoordinate:coordinate andTag:0];
     [self.map addAnnotation:newAnnotation];
-    [self.map selectAnnotation:newAnnotation animated:YES];
+    [self.map selectAnnotation:newAnnotation animated:NO];
     
     
     
