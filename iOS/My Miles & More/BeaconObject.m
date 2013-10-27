@@ -30,6 +30,8 @@
     self.longitude           = [dict[@"longitude"] floatValue];
     self.latitude            = [dict[@"latitude"] floatValue];
     self.uuid                = dict[@"uuid"];
+    self.city                = dict[@"city"];
+    self.countryCode         = dict[@"country"];
 }
 
 @end

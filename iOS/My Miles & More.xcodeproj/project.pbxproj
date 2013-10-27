@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		7B7EF58E181C777400CB9B0C /* BeaconObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF58D181C777400CB9B0C /* BeaconObject.m */; };
 		7B7EF591181C7D5500CB9B0C /* UIViewController+dismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */; };
+		7B7EF5F5181C964E00CB9B0C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7EF5F4181C964E00CB9B0C /* MapKit.framework */; };
 		7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */; };
 		7BB7578A181C48F000B69F3E /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75789181C48F000B69F3E /* DescriptionViewController.m */; };
 		7BB7578C181C490C00B69F3E /* DescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */; };
-		7BB7578E181C4B8C00B69F3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB7578D181C4B8C00B69F3E /* MapKit.framework */; };
 		7BB75791181C58BF00B69F3E /* UIColor+iOS7Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */; };
 		7BBE6BA4181BE92A004E1C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA3181BE92A004E1C68 /* Foundation.framework */; };
 		7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBE6BA5181BE92A004E1C68 /* CoreGraphics.framework */; };
@@ -60,11 +60,11 @@
 		7B7EF58D181C777400CB9B0C /* BeaconObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconObject.m; sourceTree = "<group>"; };
 		7B7EF58F181C7D5500CB9B0C /* UIViewController+dismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+dismiss.h"; sourceTree = "<group>"; };
 		7B7EF590181C7D5500CB9B0C /* UIViewController+dismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+dismiss.m"; sourceTree = "<group>"; };
+		7B7EF5F4181C964E00CB9B0C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		7BB75788181C48F000B69F3E /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
 		7BB75789181C48F000B69F3E /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
 		7BB7578B181C490C00B69F3E /* DescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionViewController.xib; sourceTree = "<group>"; };
-		7BB7578D181C4B8C00B69F3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7BB7578F181C58BF00B69F3E /* UIColor+iOS7Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+iOS7Colors.h"; sourceTree = "<group>"; };
 		7BB75790181C58BF00B69F3E /* UIColor+iOS7Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+iOS7Colors.m"; sourceTree = "<group>"; };
 		7BBE6BA0181BE92A004E1C68 /* My Miles & More.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Miles & More.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +115,6 @@
 		AA480E0C181C3EF5005630AB /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
 		AA480E0E181C5193005630AB /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
 		AA480E0F181C5193005630AB /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
-		AA480E11181C5259005630AB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BB7578E181C4B8C00B69F3E /* MapKit.framework in Frameworks */,
+				7B7EF5F5181C964E00CB9B0C /* MapKit.framework in Frameworks */,
 				7BE21800181BFA50006DE7A6 /* CoreLocation.framework in Frameworks */,
 				7BAD7D7F181BECB2003D4084 /* CoreBluetooth.framework in Frameworks */,
 				7BBE6BA6181BE92A004E1C68 /* CoreGraphics.framework in Frameworks */,
@@ -167,7 +166,7 @@
 		7BBE6BA2181BE92A004E1C68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AA480E11181C5259005630AB /* MapKit.framework */,
+				7B7EF5F4181C964E00CB9B0C /* MapKit.framework */,
 				7BE217FF181BFA50006DE7A6 /* CoreLocation.framework */,
 				7BAD7D7E181BECB2003D4084 /* CoreBluetooth.framework */,
 				7BBE6BA3181BE92A004E1C68 /* Foundation.framework */,
@@ -540,6 +539,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "My Miles & More/My Miles & More-Prefix.pch";
 				INFOPLIST_FILE = "My Miles & More/My Miles & More-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ED88D080-DFBD-426A-AE67-E85B07FAC9FB";
 				VALID_ARCHS = "arm64 armv7s armv7";
@@ -556,6 +556,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "My Miles & More/My Miles & More-Prefix.pch";
 				INFOPLIST_FILE = "My Miles & More/My Miles & More-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ED88D080-DFBD-426A-AE67-E85B07FAC9FB";
 				VALID_ARCHS = "arm64 armv7s armv7";

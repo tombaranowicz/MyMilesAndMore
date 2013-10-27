@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "UIColor+iOS7Colors.h"
 #import "BeaconObject.h"
+#import "NearbyStoresViewController.h"
 
 @interface DescriptionViewController ()
 @property (nonatomic,strong) BeaconObject* beaconObject;
@@ -74,7 +75,7 @@
 
 - (IBAction)buttonTapped:(id)sender
 {
-    
+    [self.navigationController pushViewController:[[NearbyStoresViewController alloc] initWithLatitude:self.latitude withLongitude:self.lognitude withCountryCode:self.beaconObject.countryCode withCity:self.beaconObject.city] animated:YES];
 }
 
 
