@@ -25,11 +25,13 @@
     NSMutableArray *stores;
     float storeLatitude;
     float storeLongitude;
-    Store *store;
+    
     
     UILabel *hoursLabel;
     UITextView *hoursTextView;
 }
+
+@property(nonatomic,strong) Store *store;
 
 @property (nonatomic, strong) MKMapView *mapView;
 
@@ -53,6 +55,8 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.title = @"Nearby shops";
     
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(10, 100, 300, 300)];
     self.mapView.delegate=self;
@@ -117,6 +121,8 @@
                     MapViewAnnotation *newAnnotation = [[MapViewAnnotation alloc] initWithTitle:st.storeName andCoordinate:location andTag:tag++];
                     [self.mapView addAnnotation:newAnnotation];
                 }
+                 [self selectStore:[stores firstObject]];
+                [self.mapView selectAnnotation:[[self.mapView annotations] firstObject] animated:YES];
             });
         });
         
@@ -126,6 +132,7 @@
     [operation start];
 }
 
+
 #pragma mark NSXMLParserDelegate methods
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
@@ -134,22 +141,22 @@
     
     currentElement = [attributeDict objectForKey:@"class"];
     if ([currentElement isEqualToString:@"store-name"]) {
-        if (store) {
+        if (self.store) {
 
             BOOL exist = NO;
             for (Store *tempStore in stores) {
-                if ([tempStore.storeAddress isEqualToString:store.storeAddress]) {
+                if ([tempStore.storeAddress isEqualToString:self.store.storeAddress]) {
                     exist=YES;
                 }
             }
             
             if (!exist) {
-                store.longitude = storeLongitude;
-                store.latitude = storeLatitude;
-                [stores addObject:store];
+                self.store.longitude = storeLongitude;
+                self.store.latitude = storeLatitude;
+                [stores addObject:self.store];
             }
         }
-        store = [[Store alloc] init];
+        self.store = [[Store alloc] init];
     } else if([currentElement isEqualToString:@"store "]) {
         storeLatitude = [[attributeDict objectForKey:@"data-latitude"] floatValue];
         storeLongitude = [[attributeDict objectForKey:@"data-longitude"] floatValue];
@@ -163,37 +170,43 @@
     val = [NSString stringWithFormat:@"%@%@",val,[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ];
     val = [val stringByReplacingOccurrencesOfString:@"  " withString:@""];
     if ([currentElement isEqualToString:@"store-name"] && val.length>0) {
-        store.storeName = val;
+        self.store.storeName = val;
     } else if([currentElement isEqualToString:@"store-address"] && val.length>0) {
-        store.storeAddress = val;
+        self.store.storeAddress = val;
     } else if([currentElement isEqualToString:@"store-openinghours"] && val.length>0) {
-        store.storeHours = val;
+        self.store.storeHours = val;
     }
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
-    if (store) {
+    if (self.store) {
         BOOL exist = NO;
         for (Store *tempStore in stores) {
-            if ([tempStore.storeAddress isEqualToString:store.storeAddress]) {
+            if ([tempStore.storeAddress isEqualToString:self.store.storeAddress]) {
                 exist=YES;
             }
         }
         
         if (!exist) {
-            store.longitude = storeLongitude;
-            store.latitude = storeLatitude;
-            [stores addObject:store];
+            self.store.longitude = storeLongitude;
+            self.store.latitude = storeLatitude;
+            [stores addObject:self.store];
         }
     }
 }
 
 #pragma mark MKMapViewDelegate
+
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     MapViewAnnotation *annotation = (MapViewAnnotation *)[view annotation];
     Store *store = [stores objectAtIndex:annotation.tag];
+    [self selectStore:store];
+}
+
+- (void)selectStore:(Store*)store
+{
     NSLog(@"hours: %@",store.storeHours);
     NSArray *hoursArray = [store.storeHours componentsSeparatedByString:@","];
     
