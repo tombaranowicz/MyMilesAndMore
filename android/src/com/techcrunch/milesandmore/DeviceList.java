@@ -97,7 +97,7 @@ public class DeviceList extends Activity {
 		super.onCreate(savedInstanceState);
 
 		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFFFFBD26));
-		getActionBar().setTitle("Lufthansa");
+		getActionBar().setTitle("My Miles&More");
 		
 		setContentView(R.layout.activity_device_list);
 		mLufthansa = (ImageView) findViewById(R.id.lufthansa);

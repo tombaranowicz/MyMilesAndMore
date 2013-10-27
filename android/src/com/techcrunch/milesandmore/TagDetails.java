@@ -31,6 +31,7 @@ public class TagDetails extends Activity {
 		
 		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFFFFBD26));
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle("My Miles&More");
 
 		mTag = getIntent().getParcelableExtra("tag");
 

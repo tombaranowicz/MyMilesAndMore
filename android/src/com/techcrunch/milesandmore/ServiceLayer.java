@@ -1,15 +1,11 @@
 package com.techcrunch.milesandmore;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.EntityUtils;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -28,8 +24,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -41,13 +35,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.techcrunch.milesandmore.BitmapCache.BitmapCallback;
 import com.techcrunch.milesandmore.api.AddTag;
-import com.techcrunch.milesandmore.api.Company;
 import com.techcrunch.milesandmore.api.Tag;
 import com.techcrunch.milesandmore.api.TagData;
 
 public class ServiceLayer extends Service implements BitmapCallback {
 
-	private final static String TAG = "BlouService";
+	private final static String TAG = "MMService";
 
 	private BluetoothManager mBluetoothManager;
 	private BluetoothAdapter mBluetoothAdapter;
