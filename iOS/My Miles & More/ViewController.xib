@@ -13,9 +13,28 @@
         <view contentMode="scaleToFill" id="1">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="744px-Miles_&amp;_More_Lufthansa_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tfk-qW-xGl">
+                    <rect key="frame" x="0.0" y="114" width="320" height="339"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="wL2-xB-aqs"/>
+                        <constraint firstAttribute="height" constant="339" id="wgH-ao-z5C"/>
+                    </constraints>
+                </imageView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Tfk-qW-xGl" secondAttribute="trailing" id="ELn-Fy-2M6"/>
+                <constraint firstItem="Tfk-qW-xGl" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Pjc-ry-IEm"/>
+                <constraint firstItem="Tfk-qW-xGl" firstAttribute="top" secondItem="1" secondAttribute="top" constant="114" id="beN-cU-knh"/>
+                <constraint firstAttribute="bottom" secondItem="Tfk-qW-xGl" secondAttribute="bottom" constant="115" id="dC2-6y-LSo"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="744px-Miles_&amp;_More_Lufthansa_Logo.png" width="372" height="112"/>
+    </resources>
 </document>
