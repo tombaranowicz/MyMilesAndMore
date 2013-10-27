@@ -332,7 +332,7 @@ public class ServiceLayer extends Service implements BitmapCallback {
 	}
 
 	private void showNotification(NotificationCompat.Builder builder) {
-		Intent messageIntent = new Intent(this, TagDetails.class);
+		Intent messageIntent = new Intent(this, DeviceList.class);
 		messageIntent.putExtra("tag", mTag);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		builder.setContentIntent(pendingIntent);

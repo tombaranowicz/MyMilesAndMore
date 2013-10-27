@@ -12,14 +12,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,6 +41,11 @@ public class DeviceList extends Activity {
 	private List<BluetoothDevice> mGattServices = new ArrayList<BluetoothDevice>();
 	private List<Company> mCompanies = new ArrayList<Company>();
 	private BaseAdapter mListAdapter;
+	
+	private ImageView mLufthansa;
+	private ImageView mLufthansaIn1;
+	private ImageView mLufthansaIn2;
+	private ImageView mLufthansaMm;
 	
 	private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
@@ -62,18 +71,30 @@ public class DeviceList extends Activity {
             	Log.d(TAG, "Add device");
             	mGattServices.clear();
             	mGattServices.addAll(mService.getDevices());
-            	mListAdapter.notifyDataSetChanged();
             }
         }
     };
+    
+    
+    private String[] mImages = {"http://www.lufthansa.com/mediapool/jpg/10/media_118393410.jpg", "http://www.lufthansa.com/mediapool/jpg/07/media_1471703107.jpg"};
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFFFFBD26));
+		getActionBar().setTitle("Lufthansa");
+		
 		setContentView(R.layout.activity_device_list);
-		mListView = (ListView) findViewById(R.id.list);
-		mListAdapter = new DeviceAdapter();
-		mListView.setAdapter(mListAdapter);
+		mLufthansa = (ImageView) findViewById(R.id.lufthansa);
+		BitmapCache.getInstance(getBaseContext()).loadImage("http://www.catch.de/files/1_lh_menuekarten_logo_2.jpg", mLufthansa, null);
+		mLufthansaIn1 = (ImageView) findViewById(R.id.lufthansaIn1);
+		mLufthansaIn2 = (ImageView) findViewById(R.id.lufthansaIn2);
+		mLufthansaMm = (ImageView) findViewById(R.id.lufthansaMM);
+		BitmapCache.getInstance(getBaseContext()).loadImage(mImages[0], mLufthansaIn1, null);
+		BitmapCache.getInstance(getBaseContext()).loadImage(mImages[1], mLufthansaIn2, null);
+		BitmapCache.getInstance(getBaseContext()).loadImage("http://upload.wikimedia.org/wikipedia/de/thumb/5/50/Miles_%26_More_Lufthansa_Logo.svg/744px-Miles_%26_More_Lufthansa_Logo.svg.png", mLufthansaMm, null);
 		startService(new Intent(this, ServiceLayer.class));
 		
 		registerGCM();
@@ -85,6 +106,12 @@ public class DeviceList extends Activity {
 		if(mService == null) {
 			bindService(new Intent(this, ServiceLayer.class), mServiceConnection, Context.BIND_AUTO_CREATE);
 			registerReceiver(mScanReceiver, getIntentFilter());
+		}
+		if(getIntent().hasExtra("tag")) {
+			Intent intent = new Intent(getIntent());
+			intent.setClass(this, TagDetails.class);
+			setIntent(new Intent());
+			startActivity(intent);
 		}
 	}
 	
