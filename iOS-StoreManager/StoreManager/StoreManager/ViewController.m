@@ -26,6 +26,8 @@
     self.descriptionTextView.layer.borderColor = [UIColor iOS7blueGradientEndColor].CGColor;
     self.descriptionTextView.layer.borderWidth = 0.5;
     self.descriptionTextView.layer.cornerRadius = 5.0;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(request)];
 }
 
 
@@ -38,11 +40,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)buttonTapped:(id)sender
-{
-    [self request];
 }
 
 - (void)request

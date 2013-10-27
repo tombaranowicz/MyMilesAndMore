@@ -11,7 +11,8 @@
 #import "UIColor+iOS7Colors.h"
 #import "BeaconObject.h"
 #import "NearbyStoresViewController.h"
-
+#import "MapViewAnnotation.h"
+#define METERS_PER_MILE 1609.344
 @interface DescriptionViewController ()
 @property (nonatomic,strong) BeaconObject* beaconObject;
 
@@ -65,6 +66,16 @@
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.latitude, self.lognitude);
     [self.map setCenterCoordinate:coordinate];
     [self.map setUserInteractionEnabled:NO];
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 0.6*METERS_PER_MILE, 0.6*METERS_PER_MILE);
+    MKCoordinateRegion adjustedRegion = [self.map regionThatFits:viewRegion];
+    [self.map setRegion:adjustedRegion animated:YES];
+    
+    MapViewAnnotation *newAnnotation = [[MapViewAnnotation alloc] initWithTitle:self.descriptionTitle.text andCoordinate:coordinate andTag:0];
+    [self.map addAnnotation:newAnnotation];
+    
+    
+    
     
     self.button.backgroundColor = [UIColor iOS7blueGradientEndColor];
 
